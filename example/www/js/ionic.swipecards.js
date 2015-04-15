@@ -185,6 +185,8 @@
         var translation = - (window.innerWidth - this.el.clientWidth) / 2;
         this.el.style[ionic.CSS.TRANSFORM] = 'scale(' + scaleX + ', ' + scaleY + ')';
         this.el.style['transform-origin'] = 'center center'
+        this.el.style['-webkit-transform-origin'] = 'center center'
+        this.el.style['-moz-transform-origin'] = 'center center'
 
         // this.el.style[ionic.CSS.TRANSFORM] = 'none';
         // this.el.style['position'] = 'absolute';
