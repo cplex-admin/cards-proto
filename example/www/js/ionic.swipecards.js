@@ -178,18 +178,24 @@
       if(this.y < 0) {
         this.el.style[TRANSITION] = '-webkit-transform 0.2s ease-in-out';
         // this.el.style[ionic.CSS.TRANSFORM] = 'translate3d(' + this.x + ',' + (this.startY) + 'px, 0)';
-        console.log('width ' + this.el.clientWidth);
-        console.log(this.el.style[ionic.CSS.TRANSFORM]);
-        var scale = window.innerWidth / this.el.clientWidth;
+
+
+        var scaleX = window.innerWidth / this.el.clientWidth;
+        var scaleY = window.innerHeight / this.el.clientHeight;
         var translation = - (window.innerWidth - this.el.clientWidth) / 2;
-        this.el.style[ionic.CSS.TRANSFORM] = 'none';
-        this.el.style['position'] = 'absolute';
-        this.el.style['top'] = (this.el.clientHeight / 2) + 'px' ;
-        this.el.style['left'] = (this.el.clientWidth / 2) + 'px';
-        this.el.style['width'] = window.innerWidth + 'px';
-        this.el.style['height'] = window.innerHeight + 'px';
+        this.el.style[ionic.CSS.TRANSFORM] = 'scale(' + scaleX + ', ' + scaleY + ')';
+        this.el.style['transform-origin'] = 'center center'
+
+        // this.el.style[ionic.CSS.TRANSFORM] = 'none';
+        // this.el.style['position'] = 'absolute';
+        // this.el.style['top'] = (this.el.clientHeight / 2) + 'px' ;
+        // this.el.style['left'] = (this.el.clientWidth / 2) + 'px';
+        // this.el.style['width'] = window.innerWidth + 'px';
+        // this.el.style['height'] = window.innerHeight + 'px';
+
         setTimeout(function() {
           self.el.style[TRANSITION] = 'none';
+          console.log('asd');
         }, 200);
       } else {
         // Fly out

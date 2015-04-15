@@ -28,21 +28,29 @@
 <body ng-app="starter" no-scroll>
 
   <ion-pane ng-controller="CardsCtrl">
+    <!-- <ion-header-bar class="bar-transparent">
+      <h1 class="title">Help Out</h1>
+    </ion-header-bar> -->
     <swipe-cards>
       <swipe-card on-card-swipe="cardSwiped()" id="start-card">
         Swipe down for a new card
       </swipe-card>
       <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
         <div ng-controller="CardCtrl">
-          <div class="title">
-            {{card.title}}
+          <div class="front" ng-class="{flipped: flipped}">
+            <div class="title">
+              {{card.title}}
+            </div>
+            <div class="image">
+              <img ng-src="{{card.image}}">
+            </div>
+            <div class="button-bar">
+              <button class="button button-clear button-positive" ng-click="flipped=true">Answer</button>
+              <button class="button button-clear button-positive" ng-click="goAway()">Decline</button>
+            </div>
           </div>
-          <div class="image">
-            <img ng-src="{{card.image}}">
-          </div>
-          <div class="button-bar">
-            <button class="button button-clear button-positive" ng-click="goAway()">Answer</button>
-            <button class="button button-clear button-positive" ng-click="goAway()">Decline</button>
+          <div class="back" ng-class="{flipped: flipped}">
+            <button class="button button-clear button-positive" ng-click="flipped=false">Answer</button>
           </div>
         </div>
       </swipe-card>
