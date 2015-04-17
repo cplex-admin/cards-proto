@@ -16,46 +16,39 @@
   <!-- ionic/angularjs js -->
 
   <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="lib/jquery.min.js"></script>
 
   <!-- cordova script (this will be a 404 during development) -->
   <script src="cordova.js"></script>
 
   <!-- your app's js -->
-  <script src="js/app.js"></script>
-  <script src="js/ionic.swipecards.js"></script>
+  <script src="app.js"></script>
 </head>
 
 <body ng-app="starter" no-scroll>
 
-  <ion-pane ng-controller="CardsCtrl">
-    <!-- <ion-header-bar class="bar-transparent">
-      <h1 class="title">Help Out</h1>
-    </ion-header-bar> -->
-    <swipe-cards>
-      <swipe-card on-card-swipe="cardSwiped()" id="start-card">
-        Swipe down for a new card
-      </swipe-card>
-      <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-        <div ng-controller="CardCtrl">
-          <div class="front" ng-class="{flipped: flipped}">
-            <div class="title">
-              {{card.title}}
-            </div>
-            <div class="image">
-              <img ng-src="{{card.image}}">
-            </div>
-            <div class="button-bar">
-              <button class="button button-clear button-positive" ng-click="flipped=true">Answer</button>
-              <button class="button button-clear button-positive" ng-click="goAway()">Decline</button>
-            </div>
+  <ion-pane class="gray" ng-controller="CardsCtrl">
+
+    <div class="qcards-wrapper">
+      <div class="qcard" ng-repeat="card in cards">
+          <div class="title">{{card.title}}</div>
+          <div>
+            <img src="{{card.images[0]}}">
+            <img src="{{card.images[1]}}">
+          </div><div>
+            <button class="button button-assertive">Ответ 1</button>
+            <button class="button button-positive">Ответ 2 в<br/>две строчки</button>
           </div>
-          <div class="back" ng-class="{flipped: flipped}">
-            <button class="button button-clear button-positive" ng-click="flipped=false">Answer</button>
+          <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="комментарий" ng-focus="expand()">
+          </label>
           </div>
-        </div>
-      </swipe-card>
-    </swipe-cards>
+      </div>
+    </div>
+
   </ion-pane>
+
 </body>
 
 </html>
