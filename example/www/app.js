@@ -59,30 +59,31 @@ angular.module('starter', ['ionic'])
 })
 
 
-.controller('CardsCtrl', function($scope) {
-  $scope.cards = [{
-    title: 'Swipe down to clear the card',
-    images: ['img/pic.png', 'img/pic.png']
-  }, {
-    title: 'Where is this?',
-    image: 'img/pic.png'
-  }, {
-    title: 'What kind of grass is this?',
-    image: 'img/pic2.png'
-  }, {
-    title: 'What beach is this?',
-    image: 'img/pic3.png'
-  }, {
-    title: 'What kind of clouds are these?',
-    image: 'img/pic4.png'
-  }];
-
-  setTimeout(function() {  
-    $scope.el = angular.element(document.querySelector('.qcard:first-child'))[0];
-    $scope.bindEvents();
-  }, 200);
+.controller('CardsCtrl', function($scope, $ionicScrollDelegate) {
+  $scope.cards = [
+    {
+        avatar: 'img/avatars/270018_55300e9b062e2.jpg'
+      , title: 'Ношу темные очки?'
+      , images: ['img/pics/1-1.jpg', 'img/pics/1-2.jpg']
+      , answers: ['Да,очень часто', 'Вечно забываю о них']
+    }
+    , {
+        avatar: 'img/avatars/270021_5530119e3b0d9.jpg'
+      , title: 'Какой писатель мне нравится?'
+      , images: ['img/pics/2-1.jpg', 'img/pics/2-2.jpg']
+      , answers: ['Гоголь', 'Булгаков']
+    }
+    , {
+        avatar: 'img/avatars/270026_55301847190b2.jpg'
+      , title: 'Могу ли я сесть на шпагат?'
+      , images: ['img/pics/3-1.jpg', 'img/pics/3-2.jpg']
+      , answers: ['Могу', 'Нет, не могу']
+    }
+  ];
 
   $scope.bindEvents = function() {
+    $scope.currIdx = 0;
+    $scope.el = angular.element(document.querySelector('.qcards-wrapper'))[0];
     var self = $scope;
 
     ionic.onGesture('drag', function(e) {
@@ -95,47 +96,76 @@ angular.module('starter', ['ionic'])
   };
 
   $scope._doDrag = function(e) {
+    if (!$scope.cardWidth) {
+      var card = $($scope.el).find('.qcard')[$scope.currIdx];
+      $scope.cardWidth = $scope.cardWidth ? $scope.cardWidth : card.clientWidth;
+    }
+    $scope.x = (e.gesture.deltaX * 0.7);
     $scope.y = (e.gesture.deltaY * 0.7);
 
-    if($scope.y < 0) {
-      $scope.el.style[ionic.CSS.TRANSFORM] = 'translateY(' + $scope.y  + 'px)';
+    if ($scope.y < -10) {
+      $($scope.el).find('.qcard')[$scope.currIdx].style[ionic.CSS.TRANSFORM] = 'translateY(' + $scope.y  + 'px)';
+    }
+
+    if (Math.abs($scope.x) > 10) {
+      $scope.el.style[ionic.CSS.TRANSFORM] = 'translateX(' + ($scope.getOffsetX() + $scope.x) + 'px)';
     }
   };
 
   $scope._doDragEnd = function(e) {
-    this.transitionOut(e);
+    var card = $($scope.el).find('.qcard')[$scope.currIdx];
+    if($scope.y < -100) {
+      card.style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
+
+      var correction = ($scope.currIdx > 0) ? $scope.cardWidth * 0.075 : 0;
+      var offsetX = $scope.getOffsetX() - correction;
+      $scope.el.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
+      
+      $(card).animate({
+        marginTop: "0",
+        marginLeft: "0",
+        height: "100%",
+        width: "100%",
+        // borderRadius: 0,
+      }, 150 );
+
+      setTimeout(function() {
+        $(card).find('input')[0].focus();
+      }, 200);
+    } else {
+      if (card.style.width == "100%") {
+        var marginLeft = ($scope.currIdx == 0) ? "10%" : "2.5%";
+        $(card).animate({
+          marginTop: "2.5%",
+          marginLeft: marginLeft,
+          height: "80%",
+          width: "80%",
+          // borderRadius: 0,
+        }, 150 );
+      }
+      card.style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
+      
+      if ($scope.x > 50 && $scope.currIdx > 0) {
+        $scope.currIdx--;
+      }
+      else if ($scope.x < -50 && $scope.currIdx < $scope.cards.length - 1) {
+        $scope.currIdx++;
+      }
+
+      $scope.el.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
+    }
+  };
+
+  $scope.getOffsetX = function() {
+    return - $scope.cardWidth * 1.075 * $scope.currIdx;
   };
 
   $scope.expand = function() {
-    $scope.y = -1;
-    $scope.transitionOut();
+    $scope.y = -101;
+    $scope._doDragEnd({});
   };
 
-  $scope.transitionOut = function() {
-      var self = $scope;
-
-      if($scope.y < 0) {
-        $scope.el.style[TRANSITION] = '-webkit-transform 0.2s ease-in-out';
-        $scope.el.style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
-        
-        $($scope.el).animate({
-          marginTop: "0",
-          marginLeft: "0",
-          height: "100%",
-          width: "100%",
-          borderRadius: 0,
-        }, 150 );
-
-        setTimeout(function() {
-          self.el.style[TRANSITION] = 'none';
-          $($scope.el).find('input')[0].focus();
-        }, 200);
-      } else {
-        // $scope.el.parentNode.style[TRANSITION] = '-webkit-transform 0.2s ease-in-out';
-        // $scope.el.parentNode.style[ionic.CSS.TRANSFORM] = 'translateX(' + (-$scope.el.clientWidth * 1.05) + 'px)';
-      }
-    };
-
+  $scope.bindEvents();
 
 })
 

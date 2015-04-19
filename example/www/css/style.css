@@ -3,11 +3,22 @@
   background-color: lightgray;
 }
 
+.qcards-wrapper,
+.qcard
+{
+          transition: -webkit-transform 0.2s ease-in-out;
+    webkitTransition: -webkit-transform 0.2s ease-in-out;
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+   webkit-transition: -webkit-transform 0.2s ease-in-out;
+     -moz-transition: -webkit-transform 0.2s ease-in-out;
+      moz-transition: -webkit-transform 0.2s ease-in-out;
+       MozTransition: -webkit-transform 0.2s ease-in-out;
+       mozTransition: -webkit-transform 0.2s ease-in-out;
+}
+
 .qcards-wrapper
 {
-  overflow-x: auto;
   white-space: nowrap;
-  width: 100%;
   height: 100%;
 }
 
@@ -16,9 +27,38 @@
   display: inline-block;
   width: 80%;
   margin: 2.5% 2.5% 0 2.5%;
-  background-color: white;
   vertical-align: top;
   border-radius: 10px;
+  'webkitTransition', 'transition', '-webkit-transition', 'webkit-transition',
+              '-moz-transition', 'moz-transition', 'MozTransition', 'mozTransition'
+}
+
+.qcard .item
+{
+  margin: 0;
+  border: 0;
+}
+
+.qcard .item:first-child
+{
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.qcard .item:last-child
+{
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.qcard .title img
+{
+  border-radius: 50%;
+}
+
+.qcard .images
+{
+  padding: 0;
 }
 
 .qcard img,
@@ -26,14 +66,13 @@
 {
   width: 50%;
   float: left;
-  display: block;
-  border: 0;
 }
 
 .qcard button
 {
   line-height: 1.3;
   height: 60px;
+  border: 0;
 }
 
 .qcard label

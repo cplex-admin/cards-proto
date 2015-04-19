@@ -31,18 +31,19 @@
 
     <div class="qcards-wrapper">
       <div class="qcard" ng-repeat="card in cards">
-          <div class="title">{{card.title}}</div>
-          <div>
+        <ul class="list">
+          <li class="item title item-avatar"><img src="{{card.avatar}}" class="img-circle">{{card.title}}</li>
+          <li class="item images">
             <img src="{{card.images[0]}}">
             <img src="{{card.images[1]}}">
-          </div><div>
-            <button class="button button-assertive">Ответ 1</button>
-            <button class="button button-positive">Ответ 2 в<br/>две строчки</button>
-          </div>
-          <div class="list">
-          <label class="item item-input">
+          </li>
+          <li>
+            <button class="button button-assertive">{{card.answers[0]}}</button>
+            <button class="button button-positive">{{card.answers[1]}}</button>
+          </li>
+          <li class="item item-input">
             <input type="text" placeholder="комментарий" ng-focus="expand()">
-          </label>
+          </li>
           </div>
       </div>
     </div>
