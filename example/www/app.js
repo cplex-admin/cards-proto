@@ -65,7 +65,7 @@ angular.module('starter', ['ionic'])
         avatar: 'img/avatars/270018_55300e9b062e2.jpg'
       , title: 'Ношу темные очки?'
       , images: ['img/pics/1-1.jpg', 'img/pics/1-2.jpg']
-      , answers: ['Да,очень часто', 'Вечно забываю о них']
+      , answers: ['Да, очень часто', 'Вечно забываю о них']
     }
     , {
         avatar: 'img/avatars/270021_5530119e3b0d9.jpg'
@@ -142,6 +142,7 @@ angular.module('starter', ['ionic'])
           width: "80%",
           // borderRadius: 0,
         }, 150 );
+        $(card).find('input')[0].blur();
       }
       card.style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
       
