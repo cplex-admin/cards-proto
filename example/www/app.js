@@ -82,6 +82,7 @@ angular.module('starter', ['ionic'])
   ];
 
   $scope.bindEvents = function() {
+    $scope.animDuration = 200;
     $scope.currIdx = 0;
     $scope.el = angular.element(document.querySelector('.qcards-wrapper'))[0];
     var self = $scope;
@@ -114,37 +115,36 @@ angular.module('starter', ['ionic'])
 
   $scope._doDragEnd = function(e) {
     var card = $($scope.el).find('.qcard')[$scope.currIdx];
-    card.style[TRANSITION] = '-webkit-transform 0.2s ease-in-out';
+    var jqcard = $(card);
+    card.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     card.style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
-    $scope.el.style[TRANSITION] = '-webkit-transform 0.2s ease-in-out';
+    $scope.el.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     
-    if($scope.y < -100) {
+    if($scope.y < -50) {
       var correction = ($scope.currIdx > 0) ? $scope.cardWidth * 0.075 : 0;
       var offsetX = $scope.getOffsetX() - correction;
       $scope.el.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
       
-      $(card).animate({
+      jqcard.animate({
         marginTop: "0",
         marginLeft: "0",
         height: "100%",
         width: "100%",
-        // borderRadius: 0,
-      }, 150 );
+      }, $scope.animDuration);
 
       setTimeout(function() {
-        $(card).find('input')[0].focus();
-      }, 200);
+        jqcard.find('input')[0].focus();
+      }, $scope.animDuration);
     } else {
       if (card.style.width == "100%") {
         var marginLeft = ($scope.currIdx == 0) ? "10%" : "2.5%";
-        $(card).animate({
+        jqcard.animate({
           marginTop: "2.5%",
           marginLeft: marginLeft,
           height: "80%",
           width: "80%",
-          // borderRadius: 0,
-        }, 150 );
-        $(card).find('input')[0].blur();
+        }, $scope.animDuration);
+        jqcard.find('input')[0].blur();
       }
       
       if ($scope.x > 50 && $scope.currIdx > 0) {
@@ -160,7 +160,7 @@ angular.module('starter', ['ionic'])
     setTimeout(function() {
       card.style[TRANSITION] = 'none';
       $scope.el.style[TRANSITION] = 'none';
-    }, 200);
+    }, $scope.animDuration);
   };
 
   $scope.getOffsetX = function() {

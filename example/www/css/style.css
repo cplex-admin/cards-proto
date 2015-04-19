@@ -1,6 +1,6 @@
-.gray
+.bg
 {
-  background-color: lightgray;
+  background: #314e82 url(../img/bg.png) left top repeat-y;
 }
 
 .qcards-wrapper
@@ -30,7 +30,8 @@
   border-top-left-radius: 10px;
 }
 
-.qcard .item:last-child
+.qcard .item:last-child,
+.qcard label
 {
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -68,7 +69,6 @@
 
 .qcard label
 {
-  border-radius: 10px;
   border: 0;
 }
 
