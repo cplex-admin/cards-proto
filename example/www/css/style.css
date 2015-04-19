@@ -3,19 +3,6 @@
   background-color: lightgray;
 }
 
-.qcards-wrapper,
-.qcard
-{
-          transition: -webkit-transform 0.2s ease-in-out;
-    webkitTransition: -webkit-transform 0.2s ease-in-out;
-  -webkit-transition: -webkit-transform 0.2s ease-in-out;
-   webkit-transition: -webkit-transform 0.2s ease-in-out;
-     -moz-transition: -webkit-transform 0.2s ease-in-out;
-      moz-transition: -webkit-transform 0.2s ease-in-out;
-       MozTransition: -webkit-transform 0.2s ease-in-out;
-       mozTransition: -webkit-transform 0.2s ease-in-out;
-}
-
 .qcards-wrapper
 {
   white-space: nowrap;
@@ -29,8 +16,6 @@
   margin: 2.5% 2.5% 0 2.5%;
   vertical-align: top;
   border-radius: 10px;
-  'webkitTransition', 'transition', '-webkit-transition', 'webkit-transition',
-              '-moz-transition', 'moz-transition', 'MozTransition', 'mozTransition'
 }
 
 .qcard .item
@@ -49,6 +34,11 @@
 {
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
+}
+
+.qcard .title
+{
+  white-space: normal;
 }
 
 .qcard .title img

@@ -114,9 +114,11 @@ angular.module('starter', ['ionic'])
 
   $scope._doDragEnd = function(e) {
     var card = $($scope.el).find('.qcard')[$scope.currIdx];
+    card.style[TRANSITION] = '-webkit-transform 0.2s ease-in-out';
+    card.style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
+    $scope.el.style[TRANSITION] = '-webkit-transform 0.2s ease-in-out';
+    
     if($scope.y < -100) {
-      card.style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
-
       var correction = ($scope.currIdx > 0) ? $scope.cardWidth * 0.075 : 0;
       var offsetX = $scope.getOffsetX() - correction;
       $scope.el.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
@@ -144,7 +146,6 @@ angular.module('starter', ['ionic'])
         }, 150 );
         $(card).find('input')[0].blur();
       }
-      card.style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
       
       if ($scope.x > 50 && $scope.currIdx > 0) {
         $scope.currIdx--;
@@ -155,6 +156,11 @@ angular.module('starter', ['ionic'])
 
       $scope.el.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
     }
+
+    setTimeout(function() {
+      card.style[TRANSITION] = 'none';
+      $scope.el.style[TRANSITION] = 'none';
+    }, 200);
   };
 
   $scope.getOffsetX = function() {
