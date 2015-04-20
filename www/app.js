@@ -188,7 +188,7 @@ angular.module('starter', ['ionic'])
     $scope.y = (e.gesture.deltaY * 0.7);
 
     if ($scope.y < 0) {
-      $scope.card.css(ionic.CSS.TRANSFORM, 'translateY(' + $scope.y  + 'px)');
+      $scope.card.get(0).style[ionic.CSS.TRANSFORM] = 'translateY(' + $scope.y  + 'px)';
     }
 
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + ($scope.getOffsetX() + $scope.x) + 'px)';
@@ -198,8 +198,8 @@ angular.module('starter', ['ionic'])
     if ($scope.state == 1)
       return;
     
-    $scope.card.css(TRANSITION, '-webkit-transform ' + $scope.animDuration / 1000 + 's');
-    $scope.card.css(ionic.CSS.TRANSFORM, 'translateY(0px)');
+    $scope.card.get(0).style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
+    $scope.card.get(0).style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
 
     if($scope.y < -50) {
       $scope.state = 1;
@@ -235,7 +235,7 @@ angular.module('starter', ['ionic'])
     }
 
     setTimeout(function() {
-      $scope.card.css(TRANSITION, 'none');
+      $scope.card.get(0).style[TRANSITION] = 'none';
       $scope.wrapper.style[TRANSITION] = 'none';
     }, $scope.animDuration);
   };
