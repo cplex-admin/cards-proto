@@ -193,7 +193,7 @@ angular.module('starter', ['ionic'])
     $scope.el.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     
     if($scope.y < -50) {
-      var correction = ($scope.currIdx > 0) ? $scope.cardWidth * 0.075 : 0;
+      var correction = ($scope.currIdx > 0) ? $scope.cardWidth * 0.1 : 0;
       var offsetX = $scope.getOffsetX() - correction;
       $scope.el.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
       
@@ -206,7 +206,7 @@ angular.module('starter', ['ionic'])
 
       setTimeout(function() {
         jqcard.find('input')[0].focus();
-      }, $scope.animDuration);
+      }, $scope.animDuration + 100);
     } else {
       if (card.style.width == "100%") {
         var marginLeft = ($scope.currIdx == 0) ? "10%" : "2.5%";
@@ -236,7 +236,7 @@ angular.module('starter', ['ionic'])
   };
 
   $scope.getOffsetX = function() {
-    return - $scope.cardWidth * 1.075 * $scope.currIdx;
+    return - $scope.cardWidth * 1.059 * $scope.currIdx;
   };
 
   $scope.expand = function() {
