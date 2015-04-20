@@ -32,7 +32,9 @@
     <div class="qcards-wrapper">
       <div class="qcard" ng-repeat="card in cards">
         <ul class="list">
-          <li class="item title item-avatar"><img src="{{card.avatar}}" class="img-circle">{{card.title}}</li>
+          <li class="item title">
+            <a ng-click="collapse()"><i class="icon ion-chevron-left"></i><img src="{{card.avatar}}">{{card.title}}</a>
+          </li>
           <li class="item images">
             <table>
               <tr>

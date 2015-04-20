@@ -155,51 +155,63 @@ angular.module('starter', ['ionic'])
   
   $scope.animDuration = 200;
   $scope.currIdx = 0;
-  $scope.el = angular.element(document.querySelector('.qcards-wrapper'))[0];
+  $scope.card = undefined;
+  $scope.cardWidth = undefined;
+  $scope.wrapper = $('.qcards-wrapper')[0];
+  $scope.wWidth = window.innerWidth
+                  || document.documentElement.clientWidth
+                  || document.body.clientWidth;
+  $scope.state = 0;
 
   $scope.bindEvents = function() {
     var self = $scope;
 
     ionic.onGesture('drag', function(e) {
       ionic.requestAnimationFrame(function() { self._doDrag(e) });
-    }, $scope.el);
+    }, $scope.wrapper);
 
     ionic.onGesture('dragend', function(e) {
       ionic.requestAnimationFrame(function() { self._doDragEnd(e) });
-    }, $scope.el);
+    }, $scope.wrapper);
   };
 
   $scope._doDrag = function(e) {
-    var card = $($scope.el).find('.qcard')[$scope.currIdx];
-    if (!$scope.cardWidth) {
-      $scope.cardWidth = $scope.cardWidth ? $scope.cardWidth : card.clientWidth;
+    if ($scope.state == 1)
+      return;
+
+    if ($scope.card === undefined) {
+      $scope.card = $scope.getCard($scope.currIdx);
+      $scope.cardWidth = $scope.card.get(0).clientWidth;
     }
+
     $scope.x = (e.gesture.deltaX * 0.7);
     $scope.y = (e.gesture.deltaY * 0.7);
 
-    if (card.style.width != "100%") {
-      if ($scope.y < 0) {
-        card.style[ionic.CSS.TRANSFORM] = 'translateY(' + $scope.y  + 'px)';
-      }
-
-      $scope.el.style[ionic.CSS.TRANSFORM] = 'translateX(' + ($scope.getOffsetX() + $scope.x) + 'px)';
+    if ($scope.y < 0) {
+      $scope.card.css(ionic.CSS.TRANSFORM, 'translateY(' + $scope.y  + 'px)');
     }
+
+    $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + ($scope.getOffsetX() + $scope.x) + 'px)';
   };
 
   $scope._doDragEnd = function(e) {
-    var card = $($scope.el).find('.qcard')[$scope.currIdx];
-    var jqcard = $(card);
-    card.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
-    card.style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
-    $scope.el.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
+    if ($scope.state == 1)
+      return;
     
+    $scope.card.css(TRANSITION, '-webkit-transform ' + $scope.animDuration / 1000 + 's');
+    $scope.card.css(ionic.CSS.TRANSFORM, 'translateY(0px)');
+
     if($scope.y < -50) {
-      var correction = ($scope.currIdx > 0) ? $scope.cardWidth * 0.1 : 0;
-      var offsetX = $scope.getOffsetX() - correction;
-      $scope.el.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
+      $scope.state = 1;
+  
+      var offsetX = $scope.getOffsetX()
+      if ($scope.currIdx != 0)
+        offsetX -= $scope.cardWidth * 0.1;
+      $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
+      $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
       
-      jqcard.addClass('full-screen');
-      jqcard.animate({
+      $scope.card.addClass('full-screen');
+      $scope.card.animate({
         marginTop: "0",
         marginLeft: "0",
         height: "100%",
@@ -207,20 +219,9 @@ angular.module('starter', ['ionic'])
       }, $scope.animDuration);
 
       setTimeout(function() {
-        jqcard.find('input')[0].focus();
+        $('.qcards-wrapper input')[$scope.currIdx].focus();
       }, $scope.animDuration + 100);
-    } else {
-      if (card.style.width == "100%") {
-        jqcard.removeClass('full-screen');
-        jqcard.animate({
-          marginTop: "2.5%",
-          marginLeft: ($scope.currIdx == 0) ? "10%" : "2.5%",
-          height: "80%",
-          width: "80%",
-        }, $scope.animDuration);
-        jqcard.find('input')[0].blur();
-      }
-      
+    } else {      
       if ($scope.x > 50 && $scope.currIdx > 0) {
         $scope.currIdx--;
       }
@@ -228,23 +229,48 @@ angular.module('starter', ['ionic'])
         $scope.currIdx++;
       }
 
-      $scope.el.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
+      $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
+      $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
+      $scope.card = $scope.getCard($scope.currIdx);
     }
 
     setTimeout(function() {
-      card.style[TRANSITION] = 'none';
-      $scope.el.style[TRANSITION] = 'none';
+      $scope.card.css(TRANSITION, 'none');
+      $scope.wrapper.style[TRANSITION] = 'none';
     }, $scope.animDuration);
   };
 
   $scope.getOffsetX = function() {
-    return - $scope.cardWidth * 1.059 * $scope.currIdx;
+    return - 85 * $scope.cardWidth / 80 * $scope.currIdx;
+  };
+
+  $scope.getCard = function(idx) {
+    var card = $('.qcard')[$scope.currIdx];
+    return $(card);
   };
 
   $scope.expand = function() {
+    $scope.card = $scope.getCard($scope.currIdx);
     $scope.y = -101;
     $scope._doDragEnd({});
   };
+
+  $scope.collapse = function() {
+    if ($scope.state == 0)
+      return;
+
+    $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
+    $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
+
+    $scope.state = 0;
+    $scope.card.removeClass('full-screen');
+    $scope.card.animate({
+      marginTop: "2.5%",
+      marginLeft: ($scope.currIdx == 0) ? "10%" : "2.5%",
+      height: "80%",
+      width: "80%",
+    }, $scope.animDuration);
+  };    
 
   $scope.bindEvents();
 

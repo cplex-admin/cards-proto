@@ -30,6 +30,12 @@
   border-top-left-radius: 10px;
 }
 
+.qcard.full-screen .item:first-child
+{
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
 .qcard .item:last-child,
 .qcard label
 {
@@ -37,14 +43,47 @@
   border-bottom-left-radius: 10px;
 }
 
+.qcard.full-screen  .item:last-child,
+.qcard.full-screen label
+{
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
 .qcard .title
 {
   white-space: normal;
 }
 
+.qcard .title a
+{
+  display: block;
+}
+
+.qcard .title i
+{
+  position: absolute;
+  top: 27px;
+  display: none;
+}
+
+.qcard.full-screen .title i
+{
+  display: block;
+}
+
 .qcard .title img
 {
   border-radius: 50%;
+  max-width: 40px;
+  max-height: 40px;
+  vertical-align: top;
+  margin: 0 10px 0 0px;
+}
+
+.qcard.full-screen .title img
+{
+  margin: 0 10px 0 20px;
 }
 
 .qcard .images
