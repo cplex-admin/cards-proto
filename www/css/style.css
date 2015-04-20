@@ -53,6 +53,13 @@
 .qcard .title
 {
   white-space: normal;
+  padding-left: 70px;
+  height: 70px;
+}
+
+.qcard.full-screen .title
+{
+  padding-left: 85px;
 }
 
 .qcard .title a
@@ -64,6 +71,7 @@
 {
   position: absolute;
   top: 27px;
+  left: 15px;
   display: none;
 }
 
@@ -74,16 +82,17 @@
 
 .qcard .title img
 {
+  position: absolute;
+  left: 15px;
   border-radius: 50%;
   max-width: 40px;
   max-height: 40px;
   vertical-align: top;
-  margin: 0 10px 0 0px;
 }
 
 .qcard.full-screen .title img
 {
-  margin: 0 10px 0 20px;
+  left: 35px;
 }
 
 .qcard .images
