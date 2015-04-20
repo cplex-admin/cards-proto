@@ -1,19 +1,7 @@
 {
-  "name": "ionic-ion-swipe-cards",
-  "version": "1.0.0",
-  "homepage": "https://github.com/driftyco/ionic-ion-swipe-cards",
-  "authors": [
-    "Max Lynch <max@drifty.com>"
-  ],
-  "description": "Swipeable cards ala the Jelly app",
-  "main": [
-    "ionic.swipecards.js"
-  ],
-  "keywords": [
-    "mobile",
-    "html5",
-    "ionic"
-  ],
-  "license": "MIT",
-  "private": false
+  "name": "cards-proto",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0-rc.3"
+  }
 }
