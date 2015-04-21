@@ -18,6 +18,23 @@
   border-radius: 10px;
 }
 
+.qcard.full-screen
+{
+  height: 100%;
+  background-color: #fff;
+  border-radius: 0px;
+}
+
+.qcard ul
+{
+  padding: 0;
+}
+
+.qcard.full-screen ul
+{
+  padding-top: 10px;
+}
+
 .qcard:first-child
 {
   margin-left: 10%;
@@ -157,7 +174,7 @@
 
 .qcard .images table.message tr:first-child td
 {
-  height: 86px;
+  height: 76px;
 }
 
 .qcard .images table.message tr:last-child td
@@ -177,7 +194,7 @@
 
 .qcard.full-screen .images tr:first-child td
 {
-  height: 140px;
+  height: 130px;
 }
 
 .qcard button

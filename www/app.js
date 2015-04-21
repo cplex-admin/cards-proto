@@ -267,6 +267,9 @@ angular.module('starter', ['ionic'])
 
     setTimeout(function() {
       $('.qcards-wrapper input')[$scope.currIdx].focus();
+      setTimeout(function() {
+        document.body.scrollTop = 0;
+      }, 100);
     }, $scope.animDuration + 100);
   };
 
@@ -301,6 +304,12 @@ angular.module('starter', ['ionic'])
   $scope.sendComment = function() {
     $scope.cards[$scope.currIdx].comment = $scope.cards[$scope.currIdx].newComment;
     $scope.cards[$scope.currIdx].newComment = '';
+    setTimeout(function() {
+      $('.qcards-wrapper input')[$scope.currIdx].focus();
+      setTimeout(function() {
+        document.body.scrollTop = 0;
+      }, 100);
+    }, 100);
   };
 
   $scope.bindEvents();
