@@ -13,9 +13,14 @@
 {
   display: inline-block;
   width: 80%;
-  margin: 2.5% 2.5% 0 2.5%;
+  margin: 10% 2.5% 0 2.5%;
   vertical-align: top;
   border-radius: 10px;
+}
+
+.qcard:first-child
+{
+  margin-left: 10%;
 }
 
 .qcard .item
@@ -36,63 +41,94 @@
   border-top-left-radius: 0px;
 }
 
-.qcard .item:last-child,
-.qcard label
+.qcard .title 
 {
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+  height: 85px;
 }
 
-.qcard.full-screen  .item:last-child,
-.qcard.full-screen label
+.qcard .title .btn-wrapper,
+.qcard .title .avatar-wrapper,
+.qcard .title .text
 {
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-}
 
-.qcard .title
-{
-  white-space: normal;
-  padding-left: 70px;
-  height: 70px;
-}
-
-.qcard.full-screen .title
-{
-  padding-left: 85px;
-}
-
-.qcard .title a
-{
-  display: block;
-}
-
-.qcard .title i
-{
+  display: inline-block;
+  vertical-align: top;
   position: absolute;
-  top: 27px;
-  left: 15px;
+}
+
+.qcard .title .btn-wrapper
+{
+  line-height: 40px;
+  width: 20px;
+  height: 40px;
+  font-size: 20px;
   display: none;
 }
 
-.qcard.full-screen .title i
+.qcard.full-screen .title .btn-wrapper
 {
-  display: block;
+  display: inline-block;
+}
+
+.qcard .title .avatar-wrapper
+{
+  width: 40px;
+  height: 40px;
+  margin-left: 0px;
+}
+
+.qcard.full-screen .title .avatar-wrapper
+{
+  margin-left: 20px;
 }
 
 .qcard .title img
 {
-  position: absolute;
-  left: 15px;
   border-radius: 50%;
   max-width: 40px;
   max-height: 40px;
-  vertical-align: top;
+  position: absolute;
 }
 
-.qcard.full-screen .title img
+.qcard .title .text
 {
-  left: 35px;
+  white-space: normal;
+  margin-left: 50px;
+  margin-right: 20px;
+  font-size: 18px;
+  line-height: 1;
+  color: #444a55;
+}
+
+.qcard.full-screen .title .text
+{
+  margin-left: 70px;
+}
+
+.qcard .title .text span
+{
+  display: block;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #8d9ba2;
+}
+
+
+.qcard .title .ion-checkmark-circled,
+.qcard .title .ion-plus-circled
+{
+  position: relative;
+  top: 25px;
+  left: 25px;
+  border: 1px solid white;
+  border-radius: 50%;
+  color: #00bf8f;
+  background-color: #fff;
+}
+
+.qcard .title .ion-plus-circled
+{
+  color: #e31c1c;
 }
 
 .qcard .images
@@ -105,18 +141,43 @@
   width: 100%;
 }
 
-.qcard .images td
+.qcard .images table.message
+{
+  width: 70%;
+  margin-left: 28%;
+  border: 2px solid #ebebeb;
+  margin-bottom: 20px;
+  margin-right: 2%;
+}
+
+.qcard .images table.message button
+{
+  display: none;
+}
+
+.qcard .images table.message tr:first-child td
+{
+  height: 86px;
+}
+
+.qcard .images table.message tr:last-child td
+{
+  padding: 5px 10px;
+}
+
+.qcard .images tr:first-child td
 {
   width: 50%;
-  height: 640px;
+  height: 335px;
   background-position: center center;
   background-repeat: no-repeat;
+  background-size: cover;
   vertical-align: bottom;
 }
 
-.qcard.full-screen .images td
+.qcard.full-screen .images tr:first-child td
 {
-  height: 300px;
+  height: 140px;
 }
 
 .qcard button
@@ -138,7 +199,29 @@
   border: 0;
 }
 
-.qcard:first-child
+.qcard .item:last-child
 {
-  margin-left: 10%;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.qcard.full-screen .item:last-child
+{
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.qcard .item:last-child .ion-android-send
+{
+  display: none;
+}
+
+.qcard.full-screen .item:last-child .ion-android-send
+{
+  display: block;
+  line-height: 34px;
+  font-size: 20px;
+  margin-left: 10px;
+  width: 30px;
+  color: #d7d7d7;
 }

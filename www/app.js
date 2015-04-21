@@ -23,6 +23,12 @@
     }
   }
 
+  document.addEventListener("deviceready", onDeviceReady, false);
+
+  function onDeviceReady() {
+    cordova.plugins.Keyboard.disableScroll(true);
+  }
+
 
 
 // Ionic Starter App
@@ -60,6 +66,12 @@ angular.module('starter', ['ionic'])
 
 
 .controller('CardsCtrl', function($scope, $ionicScrollDelegate) {
+
+  $scope.contacts = [
+      'img/avatars/270018_55300e9b062e2.jpg'
+    , 'img/avatars/270030_55301da729be4.jpg'
+  ];
+
   $scope.cards = [
     {
         avatar: 'img/avatars/270018_55300e9b062e2.jpg'
@@ -152,6 +164,8 @@ angular.module('starter', ['ionic'])
       , images: ['img/pics/15-1.jpg', 'img/pics/15-2.jpg']
     }
   ];
+
+  $scope.comment = { text: '', sent: false };
   
   $scope.animDuration = 200;
   $scope.currIdx = 0;
@@ -164,20 +178,20 @@ angular.module('starter', ['ionic'])
   $scope.state = 0;
 
   $scope.bindEvents = function() {
-    var self = $scope;
-
     ionic.onGesture('drag', function(e) {
-      ionic.requestAnimationFrame(function() { self._doDrag(e) });
+      ionic.requestAnimationFrame(function() { $scope._doDrag(e) });
     }, $scope.wrapper);
 
     ionic.onGesture('dragend', function(e) {
-      ionic.requestAnimationFrame(function() { self._doDragEnd(e) });
+      ionic.requestAnimationFrame(function() { $scope._doDragEnd(e) });
     }, $scope.wrapper);
   };
 
   $scope._doDrag = function(e) {
-    if ($scope.state == 1)
+    if ($scope.state == 1) {
+      console.log('_doDrag: wrong state');
       return;
+    }
 
     if ($scope.card === undefined) {
       $scope.card = $scope.getCard($scope.currIdx);
@@ -187,52 +201,28 @@ angular.module('starter', ['ionic'])
     $scope.x = (e.gesture.deltaX * 0.7);
     $scope.y = (e.gesture.deltaY * 0.7);
 
-    if ($scope.y < 0) {
-      $scope.card.get(0).style[ionic.CSS.TRANSFORM] = 'translateY(' + $scope.y  + 'px)';
-    }
-
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + ($scope.getOffsetX() + $scope.x) + 'px)';
   };
 
   $scope._doDragEnd = function(e) {
-    if ($scope.state == 1)
+    if ($scope.state == 1) {
+      console.log('_doDragEnd: wrong state');
       return;
+    }
     
     $scope.card.get(0).style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.card.get(0).style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
 
-    if($scope.y < -50) {
-      $scope.state = 1;
-  
-      var offsetX = $scope.getOffsetX()
-      if ($scope.currIdx != 0)
-        offsetX -= $scope.cardWidth * 0.1;
-      $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
-      $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
-      
-      $scope.card.addClass('full-screen');
-      $scope.card.animate({
-        marginTop: "0",
-        marginLeft: "0",
-        height: "100%",
-        width: "100%",
-      }, $scope.animDuration);
-
-      setTimeout(function() {
-        $('.qcards-wrapper input')[$scope.currIdx].focus();
-      }, $scope.animDuration + 100);
-    } else {      
-      if ($scope.x > 50 && $scope.currIdx > 0) {
-        $scope.currIdx--;
-      }
-      else if ($scope.x < -50 && $scope.currIdx < $scope.cards.length - 1) {
-        $scope.currIdx++;
-      }
-
-      $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
-      $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
-      $scope.card = $scope.getCard($scope.currIdx);
+    if ($scope.x > 50 && $scope.currIdx > 0) {
+      $scope.currIdx--;
     }
+    else if ($scope.x < -50 && $scope.currIdx < $scope.cards.length - 1) {
+      $scope.currIdx++;
+    }
+
+    $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
+    $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
+    $scope.card = $scope.getCard($scope.currIdx);
 
     setTimeout(function() {
       $scope.card.get(0).style[TRANSITION] = 'none';
@@ -250,27 +240,68 @@ angular.module('starter', ['ionic'])
   };
 
   $scope.expand = function() {
+    if ($scope.state == 1)
+      return;
+
+    $scope.state = 1;
+
     $scope.card = $scope.getCard($scope.currIdx);
-    $scope.y = -101;
-    $scope._doDragEnd({});
+    $scope.cardWidth = $scope.card.get(0).clientWidth;
+    
+    $scope.card.get(0).style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
+    $scope.card.get(0).style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
+
+    var offsetX = $scope.getOffsetX()
+    if ($scope.currIdx != 0)
+      offsetX -= $scope.cardWidth * 0.1;
+    $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
+    $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
+    
+    $scope.card.addClass('full-screen');
+    $scope.card.animate({
+      marginTop: "0",
+      marginLeft: "0",
+      height: "100%",
+      width: "100%",
+    }, $scope.animDuration);
+
+    setTimeout(function() {
+      $('.qcards-wrapper input')[$scope.currIdx].focus();
+    }, $scope.animDuration + 100);
   };
 
   $scope.collapse = function() {
     if ($scope.state == 0)
       return;
 
+    $scope.state = 0;
+    $scope.cards[$scope.currIdx].comment = '';
+
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
 
-    $scope.state = 0;
     $scope.card.removeClass('full-screen');
     $scope.card.animate({
-      marginTop: "2.5%",
+      marginTop: "10%",
       marginLeft: ($scope.currIdx == 0) ? "10%" : "2.5%",
       height: "80%",
       width: "80%",
     }, $scope.animDuration);
-  };    
+  };
+
+  $scope.toggleContacts = function(id) {
+    var idx = $scope.contacts.indexOf(id);
+    if ($scope.contacts.indexOf(id) != -1) {
+      $scope.contacts.splice(idx, 1);
+    } else {
+      $scope.contacts.push(id);
+    }
+  };
+
+  $scope.sendComment = function() {
+    $scope.cards[$scope.currIdx].comment = $scope.cards[$scope.currIdx].newComment;
+    $scope.cards[$scope.currIdx].newComment = '';
+  };
 
   $scope.bindEvents();
 
