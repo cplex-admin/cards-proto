@@ -39,7 +39,7 @@
             <a class="avatar-wrapper" ng-click="toggleContacts(card.avatar)">
               <img src="{{card.avatar}}">
               <i ng-show="contacts.indexOf(card.avatar) > -1" class="icon ion-checkmark-circled"></i>
-              <i ng-show="contacts.indexOf(card.avatar) == -1" class="icon ion-plus-circled"></i>
+              <i ng-show="contacts.indexOf(card.avatar) == -1" class="plus">+</i>
             </a>
             <div class="text">
               {{card.title}}
@@ -50,7 +50,7 @@
             <table ng-class="{message: card.comment}">
               <tr>
                 <td ng-style="{'background-image': 'url(' + card.images[0] + ')'}">
-                  <button class="button button-assertive">{{card.answers[0]}}</button>
+                  <button ng-click="takePicture()" class="button button-assertive">{{card.answers[0]}}</button>
                 </td>
                 <td ng-style="{'background-image': 'url(' + card.images[1] + ')'}">
                   <button class="button button-calm">{{card.answers[1]}}</button>
@@ -61,11 +61,20 @@
           </li>
           <li class="item item-input">
             <input type="text" placeholder="комментарий" ng-model="card.newComment" ng-focus="expand()">
+            <img src="img/share-like.jpg">
             <a ng-click="sendComment()"><i class="icon ion-android-send"></i></a>
           </li>
         </ul>
       </div>
     </div>
+
+    <div class="geo">популярно в вашем городе <i class="ion-android-locate"></i></div>
+
+    <table class="tools"><tr>
+      <td><img src="img/peoples.png"></td>
+      <td><a ng-click="takePicture()"><img src="img/add_photo.png"></a></td>
+      <td><img src="img/dialogs.png"></td>
+    </tr></table>
 
   </ion-pane>
 

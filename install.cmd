@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Android\android-sdk\platform-tools\adb" install C:\Users\matthewWork\workspace\cards-proto\platforms\android\ant-build\MainActivity-debug.apk

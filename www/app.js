@@ -257,6 +257,7 @@ angular.module('starter', ['ionic'])
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
     
+    $($scope.wrapper).addClass('full-screen');
     $scope.card.addClass('full-screen');
     $scope.card.animate({
       marginTop: "0",
@@ -283,6 +284,7 @@ angular.module('starter', ['ionic'])
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
 
+    $($scope.wrapper).removeClass('full-screen');
     $scope.card.removeClass('full-screen');
     $scope.card.animate({
       marginTop: "10%",
@@ -311,6 +313,15 @@ angular.module('starter', ['ionic'])
       }, 100);
     }, 100);
   };
+
+
+  $scope.takePicture = function() {
+    navigator.camera.getPicture(function(imageURI) {
+      alert(imageURI);
+    }, function(err) {
+      alert(err);
+    }, cameraOptions);
+  }
 
   $scope.bindEvents();
 
