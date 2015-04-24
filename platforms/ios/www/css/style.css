@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'HelveticaNeueCyr-Light';
-  src: url('/fonts/HelveticaNeueCyr-Light.otf');
+  src: url('fonts/HelveticaNeueCyr-Light.otf');
 }
 
 @font-face {
   font-family: 'HelveticaNeueCyr-Roman';
-  src: url('/fonts/HelveticaNeueCyr-Roman.otf');
+  src: url('fonts/HelveticaNeueCyr-Roman.otf');
 }
 
 body, button
@@ -345,13 +345,13 @@ body, button
 
 .two-questions
 {
-  width: 92%;
-  margin: 20px 4%;
+  width: 84%;
+  margin: 20px 8%;
 }
 
 .two-questions .image-holder td
 {
-  height: 300px;
+  height: 270px;
   background-color: #edf4f7;
   background-size: cover;
   text-align: center;
