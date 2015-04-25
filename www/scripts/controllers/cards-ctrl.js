@@ -27,7 +27,9 @@
 
 angular
 .module("cards")
-.controller('CardsCtrl', function($scope, $ionicScrollDelegate, $state, Cards, Wizard, Camera) {
+.controller('CardsCtrl', function($scope, $ionicScrollDelegate, $state, Cards, Wizard, Camera, $ionicViewSwitcher, Profile) {
+
+  $scope.profile = Profile;
 
   $scope.cards = Cards.data;
 
@@ -199,8 +201,10 @@ angular
   };
 
   $scope.goWizard = function(uri) {
+    Wizard.reset();
     Wizard.data.pictures[0] = uri;
-    $state.go("standard.wizard");
+    $ionicViewSwitcher.nextDirection('forward');
+    $state.go("standard.wizard1");
   };
 
   $scope.bindEvents();

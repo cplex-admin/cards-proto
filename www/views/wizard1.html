@@ -1,0 +1,43 @@
+<ion-view title="Создание вопроса">
+
+  <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-chevron-left" ng-click="cards()"></button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+      <button ng-show="isFilled()" class="button" ng-click="next()">ДАЛЕЕ</button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <table class="two-questions">
+      <tr><td colspan="2">
+        <input class="question" type="text" ng-model="wizard.data.question">
+      </td></tr>
+      <tr ng-show="wizard.data.type == 0 || wizard.data.type == 1 " class="image-holder">
+        <td ng-style="{'background-image': 'url(' + wizard.data.pictures[0] + ')'}">
+          <img ng-hide="wizard.data.pictures[0]" ng-click="takeShot(0)" src="img/photo-placeholder.jpg">
+        </td>
+      </tr>
+      <tr ng-show="wizard.data.type == 2" class="image-holder">
+        <td ng-style="{'background-image': 'url(' + wizard.data.pictures[0] + ')'}">
+          <img ng-hide="wizard.data.pictures[0]" ng-click="takeShot(0)" src="img/photo-placeholder.jpg">
+        </td>
+        <td ng-style="{'background-image': 'url(' + wizard.data.pictures[1] + ')'}">
+          <img ng-hide="wizard.data.pictures[1]" ng-click="takeShot(1)" src="img/photo-placeholder.jpg">
+        </td>
+      </tr>
+      <tr ng-show="wizard.data.type != 0"><td colspan="2">
+        <input class="answer" type="text" ng-model="wizard.data.answers[0]"><input class="answer" type="text" ng-model="wizard.data.answers[1]">
+      </td></tr>
+    </table>
+  </ion-content>
+
+  <ion-footer-bar class="qtype">
+    <table><tr>
+      <td><img src="img/photo-q.jpg" ng-click="wizard.data.type = 0"></td>
+      <td><img src="img/one-pictures-q.jpg" ng-click="wizard.data.type = 1"></td>
+      <td><img src="img/two-pictures-q.jpg" ng-click="wizard.data.type = 2"></td>
+    </tr></table>
+  </ion-footer-bar>
+
+</ion-view>
