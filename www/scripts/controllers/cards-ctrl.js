@@ -130,8 +130,9 @@ angular
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
     
-    $($scope.wrapper).addClass('full-screen');
-    $scope.card.addClass('full-screen');
+    $scope.wrapper.classList.add('full-screen');
+    //$($scope.wrapper).addClass('full-screen');
+    //$scope.card.addClass('full-screen');
     $scope.card.animate({
       marginTop: "0",
       marginLeft: "0",
@@ -157,8 +158,9 @@ angular
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
 
-    $($scope.wrapper).removeClass('full-screen');
-    $scope.card.removeClass('full-screen');
+    //$($scope.wrapper).removeClass('full-screen');
+    //$scope.card.removeClass('full-screen');
+    $scope.wrapper.classList.remove('full-screen');
     $scope.card.animate({
       marginTop: "10%",
       marginLeft: ($scope.currIdx == 0) ? "10%" : "2.5%",

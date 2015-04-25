@@ -45,14 +45,14 @@ body, button
   border-radius: 10px;
 }
 
-.qcard.full-screen
+.qcards-wrapper.full-screen .qcard
 {
   height: 100%;
   background-color: #fff;
   border-radius: 0px;
 }
 
-.qcard.full-screen ul
+.qcards-wrapper.full-screen .qcard ul
 {
   padding-top: 10px;
 }
@@ -69,7 +69,7 @@ body, button
   background-color: #fff;
 }
 
-.qcard.full-screen .title
+.qcards-wrapper.full-screen .qcard .title
 {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
@@ -88,7 +88,7 @@ body, button
   vertical-align: top;
 }
 
-.qcard.full-screen .title td
+.qcards-wrapper.full-screen .qcard .title td
 {
   padding-top: 20px;
 }
@@ -103,7 +103,7 @@ body, button
   display: none;
 }
 
-.qcard.full-screen .title td.back-wrapper
+.qcards-wrapper.full-screen .qcard .title td.back-wrapper
 {
   display: table-cell;
   padding-top: 0px;
@@ -122,7 +122,7 @@ body, button
   width: 60px;
 }
 
-.qcard.full-screen .title td.avatar-wrapper
+.qcards-wrapper.full-screen .qcard .title td.avatar-wrapper
 {
   padding-left: 0px;
 }
@@ -192,7 +192,7 @@ body, button
   vertical-align: bottom;
 }
 
-.qcard.full-screen .images tr:first-child td
+.qcards-wrapper.full-screen .qcard .images tr:first-child td
 {
   height: 130px;
 }
@@ -216,7 +216,7 @@ body, button
   background-color: #64a8e8;
 }
 
-.qcard.full-screen .images button
+.qcards-wrapper.full-screen .qcard .images button
 {
   background-color: rgba(0, 0, 0, 0);
 }
@@ -233,7 +233,7 @@ body, button
   background-color: #fff;
 }
 
-.qcard.full-screen .comment
+.qcards-wrapper.full-screen .qcard .comment
 {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
@@ -272,7 +272,7 @@ body, button
   margin-top: 6px
 }
 
-.qcard.full-screen .comment td.share
+.qcards-wrapper.full-screen .qcard .comment td.share
 {
   display: none;
 }
@@ -282,7 +282,7 @@ body, button
   display: none;
 }
 
-.qcard.full-screen .comment td.send
+.qcards-wrapper.full-screen .qcard .comment td.send
 {
   display: table-cell;
   line-height: 34px;
@@ -291,7 +291,7 @@ body, button
   color: #d7d7d7;
 }
 
-.qcard.full-screen .comment td.send a
+.qcards-wrapper.full-screen .qcard .comment td.send a
 {
   display: block;
 }
