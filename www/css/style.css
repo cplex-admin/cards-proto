@@ -75,6 +75,12 @@ body, button
   border-top-left-radius: 0px;
 }
 
+.qcard.chat-header .title
+{
+  background-color: #f8f8f8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
 .qcard .title table
 {
   height: 85px;
@@ -157,29 +163,58 @@ body, button
   color: #8d9ba2;
 }
 
+.qcard .chat
+{
+  width: 100%;
+}
+
+.qcard .chat td
+{
+  vertical-align: bottom;
+}
+
+.qcards-wrapper.full-screen .qcard .chat
+{
+  height: 100%;
+  position: absolute;
+  bottom: 44px;
+  z-index: -100;
+}
+
 .qcard .images
 {
   padding: 0;
   width: 100%;
 }
 
-.qcard .images.message
+.qcard .message
 {
   width: 70%;
   margin-left: 28%;
-  border: 2px solid #ebebeb;
-  margin-bottom: 20px;
+  border: 1px solid #ebebeb;
+  margin-bottom: 10px;
   margin-right: 2%;
+  border-radius: 5px;
 }
 
-.qcard .images.message tr:first-child td
+.qcard div.message
+{
+  width: auto;
+  white-space: normal;
+  display: inline-block;
+  float: right;
+}
+
+.qcard .message tr:first-child td
 {
   height: 76px;
 }
 
-.qcard .images.message tr:last-child td
+.qcard .message tr:last-child td,
+.qcard div.message
 {
   padding: 5px 10px;
+  text-align: right;
 }
 
 .qcard .images tr:first-child td
@@ -199,11 +234,19 @@ body, button
 
 .qcard .images button
 {
+  border-radius: 0;
   line-height: 1.3;
   height: 50px;
   border: 0;
   white-space: normal !important;
   width: 100%;
+  font-size: 15px;
+}
+
+.qcard .images button.half
+{
+  width: 50%;
+  float: left;
 }
 
 .qcard .images button.button-assertive
@@ -221,7 +264,7 @@ body, button
   background-color: rgba(0, 0, 0, 0);
 }
 
-.qcard .images.message .images button
+.qcard .images.message button
 {
   display: none;
 }
@@ -230,76 +273,37 @@ body, button
 {
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
+  font-size: 14px;
+  line-height: 43px;
+  height: 43px;
+  color: #c0c0c0;
+  padding: 1px 10px;
   background-color: #fff;
+}
+
+.qcard .comment div
+{
+  background: transparent url(../img/share-like.jpg) right center no-repeat;
 }
 
 .qcards-wrapper.full-screen .qcard .comment
 {
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  display: none;
 }
 
-.qcard .comment table
-{
-  width: 100%;
-}
-
-.qcard .comment td
-{
-  height: 44px;
-  padding: 5px 0;
-  vertical-align: middle;
-}
-
-.qcard .comment td input
-{
-  line-height: 1;
-  padding-left: 3px;
-}
-
-.qcard .comment td:first-child
-{
-  padding-left: 10px;
-}
-
-.qcard .comment td:last-child
-{
-  padding-right: 10px;
-}
-
-.qcard .comment td.share
-{
-  padding-right: 10px;
-  text-align: right;
-}
-
-.qcard .comment td.share img
-{
-  margin-top: 6px
-}
-
-.qcards-wrapper.full-screen .qcard .comment td.share
+.qcards-wrapper.full-screen .qcard .comment div
 {
   display: none;
 }
 
-.qcard .comment td.send
+.bar-footer.comment
 {
-  display: none;
+  opacity: 0;
 }
 
-.qcards-wrapper.full-screen .qcard .comment td.send
+.bar-footer.comment .button-clear
 {
-  display: table-cell;
-  line-height: 34px;
-  width: 30px;
   font-size: 20px;
-  color: #d7d7d7;
-}
-
-.qcards-wrapper.full-screen .qcard .comment td.send a
-{
-  display: block;
 }
 
 
@@ -359,7 +363,7 @@ body, button
 
 .two-questions .image-holder td
 {
-  height: 270px;
+  height: 230px;
   background-color: #edf4f7;
   background-size: cover;
   text-align: center;
@@ -383,7 +387,7 @@ body, button
 
 .two-questions tr:last-child td
 {
-  background: transparent url(../img/or.jpg) center center no-repeat;
+  background: transparent url(../img/or.png) center center no-repeat;
 }
 
 .two-questions .answer
@@ -400,6 +404,17 @@ body, button
   height: 43px;
 }
 
+.two-questions.right-answer-select .image-holder .overlay
+{
+  background-color: rgba(100, 155, 55, 0.5);
+  height: 100%;
+}
+
+.two-questions.right-answer-select .image-holder img
+{
+  margin-top: 100px;
+}
+
 .share
 {
   margin: 0 auto;
@@ -411,18 +426,40 @@ body, button
 {
   height: 90px;
   background-color: #f2f7f7;
+  font-size: 12px;
+  line-height: 16px;
+  color: #a4abb4;
 }
 
 .bar-footer.qtype table
 {
   width: 100%;
-  text-align: center;
 }
+
+.bar-footer.qtype table td
+{
+  text-align: center;
+  width: 33%;
+  padding-top: 5px
+}
+
+.bar-footer.qtype table td.selected
+{
+  color: #468cdc;
+}
+
+.bar-footer.qtype table img
+{
+  height: 35px;
+}
+
+
 
 .bar-footer.publish
 {
   background-color: #468edb;
   color: #fff;
+  border: none;
 }
 
 

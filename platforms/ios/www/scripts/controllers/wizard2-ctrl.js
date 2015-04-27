@@ -14,10 +14,6 @@ angular
     $state.go("standard.wizard3");
   };
 
-  $scope.isFilled = function() {
-    return  Wizard.data.rightAnswer != -1 || true;
-  };
-
 })
 
 ;

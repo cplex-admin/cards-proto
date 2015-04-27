@@ -9,7 +9,12 @@
       <tr><td colspan="2">
         <div class="question">{{wizard.data.question}}</div>
       </td></tr>
-      <tr class="image-holder">
+      <tr ng-show="wizard.data.type == 0 || wizard.data.type == 1 " class="image-holder">
+        <td ng-style="{'background-image': 'url(' + wizard.data.pictures[0] + ')'}">
+          <img ng-hide="wizard.data.pictures[0]" ng-click="takeShot(0)" src="img/photo-placeholder.jpg">
+        </td>
+      </tr>
+      <tr ng-show="wizard.data.type == 2" class="image-holder">
         <td ng-style="{'background-image': 'url(' + wizard.data.pictures[0] + ')'}">
           <img ng-hide="wizard.data.pictures[0]" ng-click="takeShot(0)" src="img/photo-placeholder.jpg">
         </td>

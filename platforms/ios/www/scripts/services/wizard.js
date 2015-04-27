@@ -9,7 +9,7 @@ angular
       question: 'Что мне нравится больше?',
       pictures: [],
       answers: ['Это', 'Это'],
-      rightAnswer: -1
+      rightAnswer: 0
     };
   };
   this.reset();

@@ -33,10 +33,7 @@ angular
 
   $scope.cards = Cards.data;
 
-  $scope.contacts = [
-      'img/avatars/270018_55300e9b062e2.jpg'
-    , 'img/avatars/270030_55301da729be4.jpg'
-  ];
+  $scope.contacts = [];
 
   $scope.comment = { text: '', sent: false };
   
@@ -45,6 +42,7 @@ angular
   $scope.card = undefined;
   $scope.cardWidth = undefined;
   $scope.wrapper = $('.qcards-wrapper')[0];
+  $scope.commentBar = $('.bar-footer.comment')[0];
   $scope.wWidth = window.innerWidth
                   || document.documentElement.clientWidth
                   || document.body.clientWidth;
@@ -131,8 +129,6 @@ angular
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
     
     $scope.wrapper.classList.add('full-screen');
-    //$($scope.wrapper).addClass('full-screen');
-    //$scope.card.addClass('full-screen');
     $scope.card.animate({
       marginTop: "0",
       marginLeft: "0",
@@ -141,10 +137,8 @@ angular
     }, $scope.animDuration);
 
     setTimeout(function() {
-      $('.qcards-wrapper input')[$scope.currIdx].focus();
-      setTimeout(function() {
-        document.body.scrollTop = 0;
-      }, 100);
+      $scope.commentBar.style.opacity = 1;
+      $scope.commentBar.getElementsByTagName('input')[0].focus();
     }, $scope.animDuration + 100);
   };
 
@@ -153,14 +147,14 @@ angular
       return;
 
     $scope.state = 0;
-    $scope.cards[$scope.currIdx].comment = '';
+    $scope.cards[$scope.currIdx].comments = [];
 
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
 
-    //$($scope.wrapper).removeClass('full-screen');
-    //$scope.card.removeClass('full-screen');
+    $scope.commentBar.style.opacity = 0;
     $scope.wrapper.classList.remove('full-screen');
+    $scope.card.get(0).classList.remove('chat-header');
     $scope.card.animate({
       marginTop: "10%",
       marginLeft: ($scope.currIdx == 0) ? "10%" : "2.5%",
@@ -179,14 +173,15 @@ angular
   };
 
   $scope.sendComment = function() {
-    $scope.cards[$scope.currIdx].comment = $scope.cards[$scope.currIdx].newComment;
+    $scope.card.get(0).classList.add('chat-header');
+    if (!$scope.cards[$scope.currIdx].comments) {
+      $scope.cards[$scope.currIdx].comments = [];
+    }
+    $scope.cards[$scope.currIdx].comments.push($scope.cards[$scope.currIdx].newComment);
     $scope.cards[$scope.currIdx].newComment = '';
-    setTimeout(function() {
-      $('.qcards-wrapper input')[$scope.currIdx].focus();
-      setTimeout(function() {
-        document.body.scrollTop = 0;
-      }, 100);
-    }, 100);
+    // setTimeout(function() {
+    //   $scope.commentBar.getElementsByTagName('input')[0].focus();
+    // }, 100);
   };
 
   $scope.takePicture = function() {

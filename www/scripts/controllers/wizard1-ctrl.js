@@ -43,6 +43,13 @@ angular
             );
   };
 
+  $scope.toggleType = function(step) {
+    if ((Wizard.data.type == 0 && step == -1) || (Wizard.data.type == 2 && step == 1))
+      return;
+
+    Wizard.data.type += step;
+  };
+
 })
 
 ;
