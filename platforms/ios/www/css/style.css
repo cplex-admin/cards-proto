@@ -298,7 +298,7 @@ body, button
 
 .bar-footer.comment
 {
-  opacity: 0;
+  visibility: hidden;
 }
 
 .bar-footer.comment .button-clear
@@ -358,7 +358,7 @@ body, button
 .two-questions
 {
   width: 84%;
-  margin: 20px 8%;
+  margin: 10px 8% 20px 8%;
 }
 
 .two-questions .image-holder td

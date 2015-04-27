@@ -137,7 +137,7 @@ angular
     }, $scope.animDuration);
 
     setTimeout(function() {
-      $scope.commentBar.style.opacity = 1;
+      $scope.commentBar.style.visibility = 'visible';
       $scope.commentBar.getElementsByTagName('input')[0].focus();
     }, $scope.animDuration + 100);
   };
@@ -152,7 +152,7 @@ angular
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
 
-    $scope.commentBar.style.opacity = 0;
+    $scope.commentBar.style.visibility = 'hidden';
     $scope.wrapper.classList.remove('full-screen');
     $scope.card.get(0).classList.remove('chat-header');
     $scope.card.animate({
