@@ -139,6 +139,7 @@ angular
     setTimeout(function() {
       $scope.commentBar.style.visibility = 'visible';
       $scope.commentBar.getElementsByTagName('input')[0].focus();
+      $scope.card.get(0).classList.add('fixed');
     }, $scope.animDuration + 100);
   };
 
@@ -154,6 +155,7 @@ angular
 
     $scope.commentBar.style.visibility = 'hidden';
     $scope.wrapper.classList.remove('full-screen');
+    $scope.card.get(0).classList.remove('fixed');
     $scope.card.get(0).classList.remove('chat-header');
     $scope.card.animate({
       marginTop: "10%",
