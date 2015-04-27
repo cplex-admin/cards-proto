@@ -1,15 +1,18 @@
 angular
 .module('cards')
-.factory('Wizard', function() {
-  var wizard = {
-    data: {
+.service('Wizard', function(Profile) {
+  this.data = {};
+  this.reset = function() {
+    this.data = {
+      avatar: Profile.avatar,
       type: 2,
-      question: '',
+      question: 'Что мне нравится больше?',
       pictures: [],
-      answers: []
-    }
+      answers: ['Это', 'Это'],
+      rightAnswer: -1
+    };
   };
-  return wizard;
+  this.reset();
 })
 
 ;

@@ -251,6 +251,12 @@ body, button
   vertical-align: middle;
 }
 
+.qcard .comment td input
+{
+  line-height: 1;
+  padding-left: 3px;
+}
+
 .qcard .comment td:first-child
 {
   padding-left: 10px;

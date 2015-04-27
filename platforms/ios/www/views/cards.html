@@ -1,39 +1,38 @@
 <div class="qcards-wrapper">
   <div class="qcard" ng-repeat="card in cards">
-    <ul class="list">
-      <li class="item title">
-        <a class="btn-wrapper" ng-click="collapse()">
-          <i class="icon ion-chevron-left"></i>
-        </a>
-        <a class="avatar-wrapper" ng-click="toggleContacts(card.avatar)">
-          <img src="{{card.avatar}}">
-          <i ng-show="contacts.indexOf(card.avatar) > -1" class="icon ion-checkmark-circled"></i>
-          <i ng-show="contacts.indexOf(card.avatar) == -1" class="plus">+</i>
-        </a>
-        <div class="text">
-          {{card.title}}
-          <span>Саша, 23</span>
-        </div>
-      </li>
-      <li class="item images">
-        <table ng-class="{message: card.comment}">
-          <tr>
-            <td ng-style="{'background-image': 'url(' + card.images[0] + ')'}">
-              <button class="button button-assertive">{{card.answers[0]}}</button>
-            </td>
-            <td ng-style="{'background-image': 'url(' + card.images[1] + ')'}">
-              <button class="button button-calm">{{card.answers[1]}}</button>
-            </td>
-          </tr>
-          <tr ng-show="card.comment"><td colspan="2">{{card.comment}}</td></tr>
-        </table>
-      </li>
-      <li class="item item-input">
-        <input type="text" placeholder="комментарий" ng-model="card.newComment" ng-focus="expand()">
-        <img src="img/share-like.jpg">
-        <a ng-click="sendComment()"><i class="icon ion-android-send"></i></a>
-      </li>
-    </ul>
+    <div class="title">
+      <table><tr>
+        <td class="back-wrapper"><a ng-click="collapse()"><i class="icon ion-chevron-left"></i></a></td>
+        <td class="avatar-wrapper">
+          <a ng-click="toggleContacts(card.avatar)" ng-style="{'background-image': 'url(' + card.avatar + ')'}">
+            <img ng-show="contacts.indexOf(card.avatar) > -1 && card.avatar != profile.avatar" src="img/person-not-added.png">
+            <img ng-show="contacts.indexOf(card.avatar) == -1 && card.avatar != profile.avatar" src="img/person-added.png">
+          </a>
+        </td>
+        <td class="text">{{card.question}}<span>Саша, 23</span></td>
+      </tr></table>
+    </div>
+    <table class="images" ng-class="{message: card.comment}">
+      <tr>
+        <td ng-style="{'background-image': 'url(' + card.pictures[0] + ')'}">
+          <button class="button button-assertive">{{card.answers[0]}}</button>
+        </td>
+        <td ng-style="{'background-image': 'url(' + card.pictures[1] + ')'}">
+          <button class="button button-calm">{{card.answers[1]}}</button>
+        </td>
+      </tr>
+      <tr ng-show="card.comment"><td colspan="2">{{card.comment}}</td></tr>
+    </table>
+    <div class="comment">
+      <table>
+        <tr ng-show="card.avatar != profile.avatar">
+          <td><input type="text" placeholder="комментарий" ng-model="card.newComment" ng-focus="expand()"></td>
+          <td class="share"><img src="img/share-like.jpg"></td>
+          <td class="send"><a ng-click="sendComment()"><i class="icon ion-android-send"></i></a></td>
+        </tr>
+        <tr ng-show="card.avatar == profile.avatar"><td>&nbsp</td></tr>
+      </table>
+    </div>
   </div>
 </div>
 

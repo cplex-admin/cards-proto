@@ -27,7 +27,9 @@
 
 angular
 .module("cards")
-.controller('CardsCtrl', function($scope, $ionicScrollDelegate, $state, Cards, Wizard, Camera) {
+.controller('CardsCtrl', function($scope, $ionicScrollDelegate, $state, Cards, Wizard, Camera, $ionicViewSwitcher, Profile) {
+
+  $scope.profile = Profile;
 
   $scope.cards = Cards.data;
 
@@ -128,8 +130,9 @@ angular
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
     
-    $($scope.wrapper).addClass('full-screen');
-    $scope.card.addClass('full-screen');
+    $scope.wrapper.classList.add('full-screen');
+    //$($scope.wrapper).addClass('full-screen');
+    //$scope.card.addClass('full-screen');
     $scope.card.animate({
       marginTop: "0",
       marginLeft: "0",
@@ -155,8 +158,9 @@ angular
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
 
-    $($scope.wrapper).removeClass('full-screen');
-    $scope.card.removeClass('full-screen');
+    //$($scope.wrapper).removeClass('full-screen');
+    //$scope.card.removeClass('full-screen');
+    $scope.wrapper.classList.remove('full-screen');
     $scope.card.animate({
       marginTop: "10%",
       marginLeft: ($scope.currIdx == 0) ? "10%" : "2.5%",
@@ -199,8 +203,10 @@ angular
   };
 
   $scope.goWizard = function(uri) {
+    Wizard.reset();
     Wizard.data.pictures[0] = uri;
-    $state.go("standard.wizard");
+    $ionicViewSwitcher.nextDirection('forward');
+    $state.go("standard.wizard1");
   };
 
   $scope.bindEvents();

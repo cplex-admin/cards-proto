@@ -49,15 +49,35 @@ angular
           abstract: true,
           templateUrl: "views/layouts/standard.html"
       })
-      .state('standard.wizard', {
-          url: "/wizard",
+      .state('standard.wizard1', {
+          url: "/wizard1",
           views: {
               'content': {
-                  templateUrl: "views/wizard.html",
-                  controller: "WizardCtrl"
+                  templateUrl: "views/wizard1.html",
+                  controller: "Wizard1Ctrl"
               }
           }
-      });
+      })
+      .state('standard.wizard2', {
+          url: "/wizard2",
+          views: {
+              'content': {
+                  templateUrl: "views/wizard2.html",
+                  controller: "Wizard2Ctrl"
+              }
+          }
+      })
+      .state('standard.wizard3', {
+          url: "/wizard3",
+          views: {
+              'content': {
+                  templateUrl: "views/wizard3.html",
+                  controller: "Wizard3Ctrl"
+              }
+          }
+      })
+
+      ;
 
     $urlRouterProvider.otherwise("/cards");
     
