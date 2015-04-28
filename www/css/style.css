@@ -26,6 +26,11 @@ body, button
   background: none;
 }
 
+.cards-content.has-header
+{
+  top: 0;
+}
+
 .qcards-wrapper
 {
   white-space: nowrap;
@@ -88,13 +93,23 @@ body, button
   width: 100%;
 }
 
-.qcard .title table
+.qcard .title table,
+.card-title,
+.bar-header.cards-header
 {
   height: 85px;
   width: 100%;
 }
 
-.qcard .title td
+.bar-header.cards-header
+{
+  z-index: 10000;
+  display: none;
+  border: none;
+}
+
+.qcard .title td,
+.card-title td
 {
   padding-top: 10px;
   white-space: normal;
@@ -116,23 +131,40 @@ body, button
   display: none;
 }
 
+.card-title td.back-wrapper
+{
+  padding-left: 2px;
+  width: 13px;
+  line-height: 43px;
+  text-align: left;
+  font-size: 20px;
+  display: table-cell;
+}
+
 .qcards-wrapper.full-screen .qcard .title td.back-wrapper
 {
   display: table-cell;
   padding-top: 0px;
 }
 
-.qcard .title td.back-wrapper a
+.qcard .title td.back-wrapper a,
+.card-title td.back-wrapper a
 {
   width: 100%;
   display: block;
   color: #0084ff;
 }
 
-.qcard .title td.avatar-wrapper
+.qcard .title td.avatar-wrapper,
+.card-title td.avatar-wrapper
 {
   padding-left: 10px;
   width: 60px;
+}
+
+.card-title td.avatar-wrapper
+{
+  width: 70px;
 }
 
 .qcards-wrapper.full-screen .qcard .title td.avatar-wrapper
@@ -140,7 +172,8 @@ body, button
   padding-left: 0px;
 }
 
-.qcard .title td.avatar-wrapper a
+.qcard .title td.avatar-wrapper a,
+.card-title td.avatar-wrapper a
 {
   background-size: cover;
   display: block;
@@ -149,20 +182,23 @@ body, button
   height: 40px;
 }
 
-.qcard .title td.avatar-wrapper img
+.qcard .title td.avatar-wrapper img,
+.card-title td.avatar-wrapper img
 {
   height: 16px;
   margin: 27px 0 0 27px;
 }
 
-.qcard .title td.text
+.qcard .title td.text,
+.card-title td.text
 {
   padding-right: 10px;
   font-size: 16px;
   line-height: 1;
 }
 
-.qcard .title td.text span
+.qcard .title td.text span,
+.card-title td.text span
 {
   display: block;
   font-size: 13px;
@@ -178,14 +214,6 @@ body, button
 .qcard .chat td
 {
   vertical-align: bottom;
-}
-
-.qcards-wrapper.full-screen .qcard .chat
-{
-  height: 100%;
-  position: absolute;
-  bottom: 44px;
-  z-index: -100;
 }
 
 .qcard .images
@@ -236,7 +264,7 @@ body, button
 
 .qcards-wrapper.full-screen .qcard .images tr:first-child td
 {
-  height: 130px;
+  height: 230px;
 }
 
 .qcard .images button

@@ -1,67 +1,79 @@
-<div class="qcards-wrapper">
-  <div class="qcard" ng-repeat="card in cards">
-    <div class="title">
+<ion-view>
+  <ion-header-bar class="cards-header">
+    <div class="card-title">
       <table><tr>
         <td class="back-wrapper"><a ng-click="collapse()"><i class="icon ion-chevron-left"></i></a></td>
         <td class="avatar-wrapper">
-          <a ng-click="toggleContacts(card.avatar)" ng-style="{'background-image': 'url(' + card.avatar + ')'}">
-            <img ng-show="contacts.indexOf(card.avatar) == -1 && card.avatar != profile.avatar" src="img/person-not-added.png">
-            <img ng-show="contacts.indexOf(card.avatar) > -1 && card.avatar != profile.avatar" src="img/person-added.png">
+          <a ng-click="toggleContacts(cards[currIdx].avatar)" ng-style="{'background-image': 'url(' + cards[currIdx].avatar + ')'}">
+            <img ng-show="cards[currIdx].avatar != profile.avatar"
+                 ng-src="{{ contacts.indexOf(cards[currIdx].avatar) == -1 && 'img/person-not-added.png' || 'img/person-added.png'}}">
           </a>
         </td>
-        <td class="text">{{card.question}}<span>Саша, 23</span></td>
+        <td class="text">{{cards[currIdx].question}}<span>Саша, 23</span></td>
       </tr></table>
     </div>
-    <table class="chat"><tr><td>    
-      <table ng-show="card.type == 0" class="images" ng-class="{message: card.comments.length > 0}">
-        <tr><td ng-style="{'background-image': 'url(' + card.pictures[0] + ')'}"></td></tr>
-        <tr ng-show="card.comments[0]"><td colspan="2">{{card.comments[0]}}</td></tr>
-      </table>
-      <table ng-show="card.type == 1" class="images" ng-class="{message: card.comments.length > 0}">
-        <tr><td ng-style="{'background-image': 'url(' + card.pictures[0] + ')'}">
-          <button class="button button-assertive half">{{card.answers[0]}}</button>
-          <button class="button button-calm half">{{card.answers[1]}}</button>
-        </td></tr>
-        <tr ng-show="card.comments[0]"><td colspan="2">{{card.comments[0]}}</td></tr>
-      </table>
-      <table ng-show="card.type == 2" class="images" ng-class="{message: card.comments.length > 0}">
-        <tr>
-          <td ng-style="{'background-image': 'url(' + card.pictures[0] + ')'}">
-            <button class="button button-assertive">{{card.answers[0]}}</button>
-          </td>
-          <td ng-style="{'background-image': 'url(' + card.pictures[1] + ')'}">
-            <button class="button button-calm">{{card.answers[1]}}</button>
-          </td>
-        </tr>
-        <tr ng-show="card.comments[0]"><td colspan="2">{{card.comments[0]}}</td></tr>
-      </table>
-      <div class="clearfix" ng-repeat="comment in card.comments.slice(1) track by $index">
-        <div class="message">{{comment}}</div>
+
+  </ion-header-bar>
+  <ion-content scroll="false" class="cards-content">
+    <div class="qcards-wrapper">
+      <div class="qcard" ng-repeat="card in cards">
+        <div class="title">
+          <table><tr>
+            <td class="back-wrapper"><a ng-click="collapse()"><i class="icon ion-chevron-left"></i></a></td>
+            <td class="avatar-wrapper">
+              <a ng-click="toggleContacts(card.avatar)" ng-style="{'background-image': 'url(' + card.avatar + ')'}">
+                <img ng-show="card.avatar != profile.avatar"
+                     ng-src="{{ contacts.indexOf(card.avatar) == -1 && 'img/person-not-added.png' || 'img/person-added.png'}}">
+              </a>
+            </td>
+            <td class="text">{{card.question}}<span>Саша, 23</span></td>
+          </tr></table>
+        </div>
+        <ion-scroll class="chat-panel" delegate-handle="chat-panel" direction="y" style="background-color: white; width: 100%">
+          <div class="spacer"></div>
+          <table ng-show="card.type == 0" class="images" ng-class="{message: card.comments.length > 0}">
+            <tr><td ng-style="{'background-image': 'url(' + card.pictures[0] + ')'}"></td></tr>
+            <tr ng-show="card.comments[0]"><td colspan="2">{{card.comments[0]}}</td></tr>
+          </table>
+          <table ng-show="card.type == 1" class="images" ng-class="{message: card.comments.length > 0}">
+            <tr><td ng-style="{'background-image': 'url(' + card.pictures[0] + ')'}">
+              <button class="button button-assertive half">{{card.answers[0]}}</button>
+              <button class="button button-calm half">{{card.answers[1]}}</button>
+            </td></tr>
+            <tr ng-show="card.comments[0]"><td colspan="2">{{card.comments[0]}}</td></tr>
+          </table>
+          <table ng-show="card.type == 2" class="images" ng-class="{message: card.comments.length > 0}">
+            <tr>
+              <td ng-style="{'background-image': 'url(' + card.pictures[0] + ')'}">
+                <button class="button button-assertive">{{card.answers[0]}}</button>
+              </td>
+              <td ng-style="{'background-image': 'url(' + card.pictures[1] + ')'}">
+                <button class="button button-calm">{{card.answers[1]}}</button>
+              </td>
+            </tr>
+            <tr ng-show="card.comments[0]"><td colspan="2">{{card.comments[0]}}</td></tr>
+          </table>
+          <div class="clearfix" ng-repeat="comment in card.comments.slice(1) track by $index">
+            <div class="message">{{comment}}</div>
+          </div>
+        </ion-scroll>
+        <div class="comment">
+          <div ng-show="card.avatar != profile.avatar" ng-click="expand()">комментарий</div>
+        </div>
       </div>
-    </td></tr></table>
-    <div class="comment">
-      <!-- <table>
-        <tr ng-show="card.avatar != profile.avatar">
-          <td><input type="text" placeholder="комментарий" ng-model="card.newComment" ng-focus="expand()"></td>
-          <td class="share"><img src="img/share-like.jpg"></td>
-          <td class="send"><a ng-click="sendComment()"><i class="icon ion-android-send"></i></a></td>
-        </tr>
-        <tr ng-show="card.avatar == profile.avatar"><td>&nbsp</td></tr>
-      </table> -->
-      <div ng-show="card.avatar != profile.avatar" ng-click="expand()">комментарий</div>
     </div>
-  </div>
-</div>
 
-<div class="geo">популярно в вашем городе <i class="ion-android-locate"></i></div>
+    <div class="geo">популярно в вашем городе <i class="ion-android-locate"></i></div>
 
-<table class="tools"><tr>
-  <td><img src="img/peoples.png"></td>
-  <td><a ng-click="takePicture()"><img src="img/add-photo.png"></a></td>
-  <td><img src="img/dialogs.png"></td>
-</tr></table>
+    <table class="tools"><tr>
+      <td><img src="img/peoples.png"></td>
+      <td><a ng-click="takePicture()"><img src="img/add-photo.png"></a></td>
+      <td><img src="img/dialogs.png"></td>
+    </tr></table>
 
-<ion-footer-bar class="comment">
-  <input type="text" placeholder="комментарий" ng-model="cards[currIdx].newComment">
-  <button class="button-clear" ng-click="sendComment()"><i class="icon ion-android-send"></i></button>
-</ion-footer-bar>
+  </ion-content>
+  <ion-footer-bar class="comment">
+    <input type="text" placeholder="комментарий" ng-model="cards[currIdx].newComment">
+    <button class="button-clear" ng-click="sendComment()"><i class="icon ion-android-send"></i></button>
+  </ion-footer-bar>
+</ion-view>

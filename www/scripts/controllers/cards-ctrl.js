@@ -139,7 +139,17 @@ angular
     setTimeout(function() {
       $scope.commentBar.style.visibility = 'visible';
       $scope.commentBar.getElementsByTagName('input')[0].focus();
-      $scope.card.get(0).classList.add('fixed');
+      //$scope.card.get(0).classList.add('fixed');
+
+
+      $('.bar-header.cards-header').show();
+      $scope.card.find('.title').hide();
+      // $('.chat').hide();
+      // $('.chat-panel').show();
+      $('.chat-panel').css('height', (window.innerHeight - 44) + 'px');
+      $('.chat-panel .spacer').css('height', (window.innerHeight) + 'px');
+      var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel');
+      viewScroll.scrollBottom(true);
     }, $scope.animDuration + 100);
   };
 
@@ -152,6 +162,14 @@ angular
 
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
+
+
+    $scope.card.find('.title').show();
+    $('.bar-header.cards-header').hide();
+      var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel');
+      viewScroll.scrollTop(false);
+      $('.chat-panel .spacer').css('height', '0');
+    $('.chat-panel').css('height', '312px');
 
     $scope.commentBar.style.visibility = 'hidden';
     $scope.wrapper.classList.remove('full-screen');
@@ -181,6 +199,8 @@ angular
     }
     $scope.cards[$scope.currIdx].comments.push($scope.cards[$scope.currIdx].newComment);
     $scope.cards[$scope.currIdx].newComment = '';
+      var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel');
+      viewScroll.scrollBottom(true);
     // setTimeout(function() {
     //   $scope.commentBar.getElementsByTagName('input')[0].focus();
     // }, 100);
