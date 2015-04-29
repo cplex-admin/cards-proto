@@ -27,7 +27,7 @@
 
 angular
 .module("cards")
-.controller('CardsCtrl', function($scope, $ionicScrollDelegate, $state, Cards, Wizard, Camera, $ionicViewSwitcher, Profile) {
+.controller('CardsCtrl', function($scope, $ionicScrollDelegate, $state, Cards, Wizard, Camera, $ionicViewSwitcher, Profile, $timeout) {
 
   $scope.profile = Profile;
 
@@ -42,13 +42,18 @@ angular
   $scope.card = undefined;
   $scope.cardWidth = undefined;
   $scope.wrapper = $('.qcards-wrapper')[0];
-  $scope.commentBar = $('.bar-footer.comment')[0];
+  $scope.titleBar = $('.bar-header')[0];
+  $scope.commentBar = $('.bar-footer')[0];
   $scope.wWidth = window.innerWidth
                   || document.documentElement.clientWidth
                   || document.body.clientWidth;
   $scope.state = 0;
 
   $scope.bindEvents = function() {
+    $timeout(function() {
+      $ionicScrollDelegate.freezeAllScrolls(true);
+    }, 100);
+
     ionic.onGesture('drag', function(e) {
       ionic.requestAnimationFrame(function() { $scope._doDrag(e) });
     }, $scope.wrapper);
@@ -95,7 +100,7 @@ angular
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
     $scope.card = $scope.getCard($scope.currIdx);
 
-    setTimeout(function() {
+    $timeout(function() {
       $scope.card.get(0).style[TRANSITION] = 'none';
       $scope.wrapper.style[TRANSITION] = 'none';
     }, $scope.animDuration);
@@ -136,10 +141,15 @@ angular
       width: "100%",
     }, $scope.animDuration);
 
-    setTimeout(function() {
-      $scope.commentBar.style.visibility = 'visible';
+    $timeout(function() {
+      $scope.titleBar.style.top = 0;
+      $scope.commentBar.style.bottom = 0;
       $scope.commentBar.getElementsByTagName('input')[0].focus();
-      $scope.card.get(0).classList.add('fixed');
+      $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = (window.innerHeight - 44 - 85) + 'px';
+
+      var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel-' + $scope.currIdx);
+      $ionicScrollDelegate.freezeScroll(false);
+      viewScroll.scrollBottom(true);
     }, $scope.animDuration + 100);
   };
 
@@ -153,10 +163,22 @@ angular
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
 
-    $scope.commentBar.style.visibility = 'hidden';
+
+    $scope.titleBar.style.top = '-100px';
+    $scope.titleBar.classList.remove('chat-header');
+    $scope.commentBar.style.bottom = '-100px';
+    $scope.commentBar.getElementsByTagName('input')[0].blur();
+    $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = '295px';
+
+    var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel-' + $scope.currIdx);
+    viewScroll.scrollTop(false);
+    viewScroll.freezeScroll(true);
+
+    var imgTable = $scope.card.find('.images').get(0)
+    imgTable.style.width = '';
+    imgTable.style['margin-left'] = '';
+
     $scope.wrapper.classList.remove('full-screen');
-    $scope.card.get(0).classList.remove('fixed');
-    $scope.card.get(0).classList.remove('chat-header');
     $scope.card.animate({
       marginTop: "10%",
       marginLeft: ($scope.currIdx == 0) ? "10%" : "2.5%",
@@ -174,16 +196,36 @@ angular
     }
   };
 
-  $scope.sendComment = function() {
-    $scope.card.get(0).classList.add('chat-header');
-    if (!$scope.cards[$scope.currIdx].comments) {
-      $scope.cards[$scope.currIdx].comments = [];
-    }
+  $scope.addComment = function(delay){
+    if (!$scope.cards[$scope.currIdx].newComment)
+      return;
+
     $scope.cards[$scope.currIdx].comments.push($scope.cards[$scope.currIdx].newComment);
     $scope.cards[$scope.currIdx].newComment = '';
-    // setTimeout(function() {
-    //   $scope.commentBar.getElementsByTagName('input')[0].focus();
-    // }, 100);
+    $timeout(function() {
+      var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel-' + $scope.currIdx);
+      viewScroll.scrollBottom(true);
+      $scope.commentBar.getElementsByTagName('input')[0].focus();
+    }, delay);
+  };
+
+  $scope.sendComment = function() {
+    if ($scope.cards[$scope.currIdx].comments && $scope.cards[$scope.currIdx].comments.length > 0) {
+      $scope.addComment(100);
+      return;
+    }
+
+    $scope.card.find('.images').animate({
+      width: '70%',
+      'margin-left': '28%'
+    }, 100, function(){
+      $scope.titleBar.classList.add('chat-header');
+      if (!$scope.cards[$scope.currIdx].comments) {
+        $scope.cards[$scope.currIdx].comments = [];
+      }
+      $scope.addComment(300);
+    });
+
   };
 
   $scope.takePicture = function() {

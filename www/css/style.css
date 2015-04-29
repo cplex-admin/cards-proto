@@ -21,6 +21,11 @@ body, button
   background-size: cover;
 }
 
+.bar
+{
+  z-index: 100;
+}
+
 .bg .pane
 {
   background: none;
@@ -29,6 +34,11 @@ body, button
 .cards-content.has-header
 {
   top: 0;
+}
+
+.cards-content.has-footer
+{
+  bottom: 0;
 }
 
 .qcards-wrapper
@@ -80,21 +90,14 @@ body, button
   border-top-left-radius: 0px;
 }
 
-.qcard.chat-header .title
+/*.qcard.chat-header .title
 {
   background-color: #f8f8f8;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.qcard.fixed .title
-{
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
+}*/
 
 .qcard .title table,
-.card-title,
+.cards-header,
 .bar-header.cards-header
 {
   height: 85px;
@@ -103,13 +106,18 @@ body, button
 
 .bar-header.cards-header
 {
-  z-index: 10000;
-  display: none;
+  top: -100px;
   border: none;
 }
 
+.bar-header.cards-header.chat-header
+{
+  background-color: #f8f8f8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
 .qcard .title td,
-.card-title td
+.cards-header td
 {
   padding-top: 10px;
   white-space: normal;
@@ -131,7 +139,7 @@ body, button
   display: none;
 }
 
-.card-title td.back-wrapper
+.cards-header td.back-wrapper
 {
   padding-left: 2px;
   width: 13px;
@@ -148,7 +156,7 @@ body, button
 }
 
 .qcard .title td.back-wrapper a,
-.card-title td.back-wrapper a
+.cards-header td.back-wrapper a
 {
   width: 100%;
   display: block;
@@ -156,13 +164,13 @@ body, button
 }
 
 .qcard .title td.avatar-wrapper,
-.card-title td.avatar-wrapper
+.cards-header td.avatar-wrapper
 {
   padding-left: 10px;
   width: 60px;
 }
 
-.card-title td.avatar-wrapper
+.cards-header td.avatar-wrapper
 {
   width: 70px;
 }
@@ -173,7 +181,7 @@ body, button
 }
 
 .qcard .title td.avatar-wrapper a,
-.card-title td.avatar-wrapper a
+.cards-header td.avatar-wrapper a
 {
   background-size: cover;
   display: block;
@@ -183,14 +191,14 @@ body, button
 }
 
 .qcard .title td.avatar-wrapper img,
-.card-title td.avatar-wrapper img
+.cards-header td.avatar-wrapper img
 {
   height: 16px;
   margin: 27px 0 0 27px;
 }
 
 .qcard .title td.text,
-.card-title td.text
+.cards-header td.text
 {
   padding-right: 10px;
   font-size: 16px;
@@ -198,7 +206,7 @@ body, button
 }
 
 .qcard .title td.text span,
-.card-title td.text span
+.cards-header td.text span
 {
   display: block;
   font-size: 13px;
@@ -206,14 +214,14 @@ body, button
   color: #8d9ba2;
 }
 
-.qcard .chat
+.chat-panel .spacer
 {
-  width: 100%;
+  height: 800px;
+  display: none;
 }
-
-.qcard .chat td
+.qcards-wrapper.full-screen .chat-panel .spacer
 {
-  vertical-align: bottom;
+  display: block;
 }
 
 .qcard .images
@@ -333,7 +341,18 @@ body, button
 
 .bar-footer.comment
 {
-  visibility: hidden;
+  bottom: -100px;
+}
+
+.bar-footer.comment label
+{
+  padding: 0;
+  background: #fff;
+}
+
+.bar-footer.comment input
+{
+  width: 100%;
 }
 
 .bar-footer.comment .button-clear
