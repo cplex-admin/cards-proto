@@ -142,7 +142,7 @@ angular
     }, $scope.animDuration);
 
     $timeout(function() {
-      $scope.titleBar.style.top = 0;
+      // $scope.titleBar.style.top = 0;
       $scope.commentBar.style.bottom = 0;
       $scope.commentBar.getElementsByTagName('input')[0].focus();
       $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = (window.innerHeight - 44 - 85) + 'px';
@@ -164,8 +164,8 @@ angular
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
 
 
-    $scope.titleBar.style.top = '-100px';
-    $scope.titleBar.classList.remove('chat-header');
+    //$scope.titleBar.style.top = '-100px';
+    //$scope.titleBar.classList.remove('chat-header');
     $scope.commentBar.style.bottom = '-100px';
     $scope.commentBar.getElementsByTagName('input')[0].blur();
     $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = '295px';
@@ -219,7 +219,7 @@ angular
       width: '70%',
       'margin-left': '28%'
     }, 100, function(){
-      $scope.titleBar.classList.add('chat-header');
+      //$scope.titleBar.classList.add('chat-header');
       if (!$scope.cards[$scope.currIdx].comments) {
         $scope.cards[$scope.currIdx].comments = [];
       }

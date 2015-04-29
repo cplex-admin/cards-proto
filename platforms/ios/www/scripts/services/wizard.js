@@ -6,7 +6,7 @@ angular
     this.data = {
       avatar: Profile.avatar,
       type: 2,
-      question: 'Что мне нравится больше?',
+      question: '',
       pictures: [],
       answers: ['Это', 'Это'],
       rightAnswer: 0

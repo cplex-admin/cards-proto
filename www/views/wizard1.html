@@ -9,9 +9,16 @@
   </ion-nav-buttons>
 
   <ion-content on-swipe-left="toggleType(1)" on-swipe-right="toggleType(-1)">
+
+    <ion-scroll class="qautocomplete" direction="y" ng-show="suggestions.length > 0">
+      <ul class="list">
+        <li class="item" ng-repeat="sug in suggestions" ng-click="selectQ(sug)">{{sug}}</li>
+      </ul>
+    </ion-scroll>
+
     <table class="two-questions">
       <tr><td colspan="2">
-        <input class="question" type="text" ng-model="wizard.data.question">
+        <input ng-change="suggest()" class="question" type="text" ng-model="wizard.data.question" placeholder="Что мне нравится больше?">
       </td></tr>
       <tr ng-show="wizard.data.type == 0 || wizard.data.type == 1 " class="image-holder">
         <td ng-style="{'background-image': 'url(' + wizard.data.pictures[0] + ')'}">
