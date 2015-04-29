@@ -14,20 +14,19 @@
         <div class="question">{{wizard.data.question}}</div>
       </td></tr>
       <tr class="image-holder">
-        <td ng-style="{'background-image': 'url(' + wizard.data.pictures[0] + ')'}" ng-click="wizard.data.rightAnswer = 0">
-          <div ng-show="wizard.data.rightAnswer == 0" class="overlay">
+        <td id="first" ng-style="{'background-image': 'url(' + wizard.data.pictures[0] + ')'}" ng-click="wizard.data.rightAnswer = 0">
+          <div ng-class="{overlay: wizard.data.rightAnswer == 0}">
             <img src="img/right-answer.png">
           </div>
+          <div class="answer">{{wizard.data.answers[0]}}</div>
         </td>
-        <td ng-style="{'background-image': 'url(' + wizard.data.pictures[1] + ')'}" ng-click="wizard.data.rightAnswer = 1">
-          <div ng-show="wizard.data.rightAnswer == 1" class="overlay">
+        <td id="second" ng-style="{'background-image': 'url(' + wizard.data.pictures[1] + ')'}" ng-click="wizard.data.rightAnswer = 1">
+          <div ng-class="{overlay: wizard.data.rightAnswer == 1}">
             <img src="img/right-answer.png">
           </div>
+          <div class="answer">{{wizard.data.answers[1]}}</div>
         </td>
       </tr>
-      <tr><td colspan="2">
-        <div class="answer">{{wizard.data.answers[0]}}</div><div class="answer">{{wizard.data.answers[1]}}</div>
-      </td></tr>
     </table>
   </ion-content>
 

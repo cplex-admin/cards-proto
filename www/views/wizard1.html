@@ -8,7 +8,8 @@
       <button ng-show="isFilled()" class="button" ng-click="next()">ДАЛЕЕ</button>
   </ion-nav-buttons>
 
-  <ion-content on-swipe-left="toggleType(1)" on-swipe-right="toggleType(-1)">
+  <!-- <ion-content on-swipe-left="toggleType(1)" on-swipe-right="toggleType(-1)"> -->
+  <ion-content>
 
     <ion-scroll class="qautocomplete" direction="y" ng-show="suggestions.length > 0">
       <ul class="list">
@@ -20,36 +21,30 @@
       <tr><td colspan="2">
         <input ng-change="suggest()" class="question" type="text" ng-model="wizard.data.question" placeholder="Что мне нравится больше?">
       </td></tr>
-      <tr ng-show="wizard.data.type == 0 || wizard.data.type == 1 " class="image-holder">
-        <td ng-style="{'background-image': 'url(' + wizard.data.pictures[0] + ')'}">
-          <img ng-hide="wizard.data.pictures[0]" ng-click="takeShot(0)" src="img/photo-placeholder.png">
+      <tr class="image-holder">
+        <td id="first" ng-style="{'background-image': 'url(' + wizard.data.pictures[0] + ')'}">
+          <img ng-class="{opacity: wizard.data.pictures[0]}" ng-click="takeShot(0)" src="img/photo-placeholder.png">
+          <input class="answer" type="text" ng-model="wizard.data.answers[0]">
+        </td>
+        <td id="second" ng-style="{'background-image': 'url(' + wizard.data.pictures[1] + ')'}">
+          <img ng-class="{opacity: wizard.data.pictures[1]}" ng-click="takeShot(1)" src="img/photo-placeholder.png">
+          <input class="answer" type="text" ng-model="wizard.data.answers[1]">
         </td>
       </tr>
-      <tr ng-show="wizard.data.type == 2" class="image-holder">
-        <td ng-style="{'background-image': 'url(' + wizard.data.pictures[0] + ')'}">
-          <img ng-hide="wizard.data.pictures[0]" ng-click="takeShot(0)" src="img/photo-placeholder.png">
-        </td>
-        <td ng-style="{'background-image': 'url(' + wizard.data.pictures[1] + ')'}">
-          <img ng-hide="wizard.data.pictures[1]" ng-click="takeShot(1)" src="img/photo-placeholder.png">
-        </td>
-      </tr>
-      <tr ng-show="wizard.data.type != 0"><td colspan="2">
-        <input class="answer" type="text" ng-model="wizard.data.answers[0]"><input class="answer" type="text" ng-model="wizard.data.answers[1]">
-      </td></tr>
     </table>
   </ion-content>
 
   <ion-footer-bar class="qtype">
     <table><tr>
-      <td ng-class="{selected: wizard.data.type == 0}" ng-click="wizard.data.type = 0">
+      <td ng-class="{selected: wizard.data.type == 0}" ng-click="switch0()">
         <img ng-src="{{wizard.data.type == 0 && 'img/photo-q-selected.png' || 'img/photo-q.png'}}"><br />
         Фотография
       </td>
-      <td ng-class="{selected: wizard.data.type == 1}" ng-click="wizard.data.type = 1">
+      <td ng-class="{selected: wizard.data.type == 1}" ng-click="switch1()">
         <img ng-src="{{wizard.data.type == 1 && 'img/one-pictures-q-selected.png' || 'img/one-pictures-q.png'}}"><br />
         Вопрос с одной картинкой
       </td>
-      <td ng-class="{selected: wizard.data.type == 2}" ng-click="wizard.data.type = 2">
+      <td ng-class="{selected: wizard.data.type == 2}" ng-click="switch2()">
         <img ng-src="{{wizard.data.type == 2 && 'img/two-pictures-q-selected.png' || 'img/two-pictures-q.png'}}"><br />
         Вопрос с двумя картинками
       </td>

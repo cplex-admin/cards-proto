@@ -75,7 +75,6 @@ angular
     }
 
     $scope.x = (e.gesture.deltaX * 0.7);
-    $scope.y = (e.gesture.deltaY * 0.7);
 
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + ($scope.getOffsetX() + $scope.x) + 'px)';
   };
@@ -233,7 +232,6 @@ angular
       $scope.goWizard('img/pics/14-1.jpg');
     } else {
       Camera.getPicture().then(function(imageURI) {
-        console.log(imageURI);
         $scope.goWizard(imageURI);
       }, function(err) {
         console.err(err);

@@ -427,12 +427,23 @@ body, button
 
 .two-questions .image-holder td
 {
-  height: 230px;
+  height: 273px;
   background-color: #edf4f7;
   background-size: cover;
   text-align: center;
-  vertical-align: middle;
   width: 50%;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.two-questions .image-holder td img.opacity
+{
+  opacity: 0;
+}
+
+.two-questions .image-holder td img
+{
+  padding: 82px 0;
 }
 
 .two-questions .question
@@ -444,7 +455,7 @@ body, button
   line-height: 34px;
 }
 
-.two-questions tr:last-child
+/*.two-questions tr:last-child
 {
   background-color: #468edb;
 }
@@ -452,31 +463,42 @@ body, button
 .two-questions tr:last-child td
 {
   background: transparent url(../img/or.png) center center no-repeat;
-}
+}*/
 
 .two-questions .answer
 {
   text-align: center;
-  background: none;
   color: white;
-  width: 50%;
-  display: inline-block;
-  line-height: 34px;
-  padding-top: 2px;
-  padding: 6px 16px 5px 16px;
+  width: 100%;
   font-size: 18px;
   height: 43px;
+  line-height: 43px;
+}
+
+.two-questions #first .answer
+{
+  background: #468edb url(../img/or-left.png) right center no-repeat;
+}
+
+.two-questions #second .answer
+{
+  background: #468edb url(../img/or-right.png) left center no-repeat;
 }
 
 .two-questions.right-answer-select .image-holder .overlay
 {
   background-color: rgba(100, 155, 55, 0.5);
-  height: 100%;
+  height: 230px;
 }
 
 .two-questions.right-answer-select .image-holder img
 {
-  margin-top: 100px;
+  opacity: 0;
+}
+
+.two-questions.right-answer-select .image-holder .overlay img
+{
+  opacity: 1;
 }
 
 .share

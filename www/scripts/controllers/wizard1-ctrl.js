@@ -7,6 +7,7 @@ angular
   $scope.cards = function() {
     $ionicViewSwitcher.nextDirection('back');
     $state.go("cards.list");
+    $scope.switch2();
   };
 
   $scope.next = function() {
@@ -70,7 +71,7 @@ angular
     $scope.suggestions = [];
     for (var i = 0; i < $scope.fullSuggestions.length; i++) {
       var s = $scope.fullSuggestions[i];
-      if (s.indexOf(Wizard.data.question) == 0) {
+      if (s.toLowerCase().indexOf(Wizard.data.question.toLowerCase()) == 0) {
         $scope.suggestions.push(s);
       }
     }
@@ -129,6 +130,116 @@ angular
     'Предпочитаю делать, как подсказывает..?',
     'Что мне не нравится в зиме?'
   ];
+
+  $scope.table = $('.two-questions .image-holder').get(0);
+  $scope.bindEvents = function() {
+    ionic.onGesture('drag', function(e) {
+      ionic.requestAnimationFrame(function() { $scope._doDrag(e) });
+    }, $scope.table);
+
+    ionic.onGesture('dragend', function(e) {
+      ionic.requestAnimationFrame(function() { $scope._doDragEnd(e) });
+    }, $scope.table);
+  };
+
+  $scope.first = $('#first').get(0);
+  $scope.second = $('#second').get(0);
+  $scope._doDrag = function(e) {
+    $scope.x = (e.gesture.deltaX);
+
+    if (Wizard.data.type == 1) {
+      var input = $scope.first.getElementsByTagName('input')[0];
+      if ($scope.x < 0)
+        input.style['background-image'] = 'url(../img/or-left.png)';
+      else {
+        input.style.width = input.clientWidth - $scope.x + 'px';
+        input.style['margin-left'] = $scope.table.clientWidth - input.clientWidth + 'px';
+      }
+    }
+
+    if (Wizard.data.type == 0)
+      if ($scope.x > 0)
+        return;
+      else {
+        var input = $scope.first.getElementsByTagName('input')[0];
+        input.style.display = 'inline-block';
+        input.style.width = -$scope.x + 'px';
+        input.style['margin-left'] = $scope.table.clientWidth + $scope.x + 'px';
+        return;
+      }
+
+
+    if (Wizard.data.type == 2 && $scope.x < 0)
+      return;
+
+    var fw = Math.max(Math.min($scope.first.clientWidth + $scope.x, $scope.table.clientWidth), $scope.table.clientWidth / 2);
+    var sw = Math.min($scope.second.clientWidth - $scope.x, $scope.table.clientWidth / 2);
+
+    if (fw > 4) {
+      $scope.first.style.width = fw + 'px';
+      $scope.first.style.display = 'inline-block';
+    }
+
+    if (sw > 4) {
+      $scope.second.style.width = sw + 'px';
+      $scope.second.style.display = 'inline-block';
+    } else {
+      $scope.second.style.display = 'none';
+    }
+  };
+
+  $scope._doDragEnd = function(e) {
+    if (Wizard.data.type == 0 && $scope.x < -10) {
+      $scope.switch1();
+      return;
+    }
+    if (Wizard.data.type == 1 && $scope.x > 10) {
+      $scope.switch0();
+      return;
+    }
+    if (Wizard.data.type == 1 && $scope.x < -10) {
+      $scope.switch2();
+      return;
+    }
+    if (Wizard.data.type == 2 && $scope.x > 10) {
+      $scope.switch1();
+      return;
+    }
+  };
+
+  $scope.switch0 = function() {
+    $scope.first.style.width = '100%';
+    $scope.first.getElementsByTagName('input')[0].style['background-image'] = 'none';
+    $scope.first.getElementsByTagName('input')[0].style.display = 'none';
+    $scope.second.style.display = 'none';
+    Wizard.data.type = 0;
+  };
+
+  $scope.switch1 = function() {
+    $scope.first.style.width = '100%';
+    var input = $scope.first.getElementsByTagName('input')[0];
+    input.style['background-image'] = 'none';
+    input.style.display = 'inline-block';
+    input.style.width = '';
+    input.style['margin-left'] = '';
+
+    $scope.second.style.display = 'none';
+    Wizard.data.type = 1;
+  };
+
+  $scope.switch2 = function() {
+    $scope.first.style.width = '50%';
+    var input = $scope.first.getElementsByTagName('input')[0];
+    input.style['background-image'] = 'url(../img/or-left.png)';
+    input.style.display = 'inline-block';
+    input.style.width = '';
+    input.style['margin-left'] = '';
+    $scope.second.style.width = '50%';
+    $scope.second.style.display = 'inline-block';
+    Wizard.data.type = 2;
+  };
+
+  $scope.bindEvents();
 
 })
 
