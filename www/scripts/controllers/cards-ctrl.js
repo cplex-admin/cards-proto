@@ -228,22 +228,22 @@ angular
   };
 
   $scope.takePicture = function() {
+    $ionicViewSwitcher.nextDirection('forward');
+    $state.go("standard.wizard1");
     if (navigator.camera === undefined) {
-      $scope.goWizard('img/pics/14-1.jpg');
+      $scope.setPicture('img/pics/14-1.jpg');
     } else {
       Camera.getPicture().then(function(imageURI) {
-        $scope.goWizard(imageURI);
+        $scope.setPicture(imageURI);
       }, function(err) {
         console.err(err);
       });
     }
   };
 
-  $scope.goWizard = function(uri) {
+  $scope.setPicture = function(uri) {
     Wizard.reset();
     Wizard.data.pictures[0] = uri;
-    $ionicViewSwitcher.nextDirection('forward');
-    $state.go("standard.wizard1");
   };
 
   $scope.bindEvents();

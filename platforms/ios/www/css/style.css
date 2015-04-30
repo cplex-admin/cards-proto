@@ -435,6 +435,7 @@ body, button
   width: 50%;
   overflow: hidden;
   display: inline-block;
+  float: left;
 }
 
 .two-questions .image-holder td img.opacity
@@ -475,6 +476,7 @@ body, button
   height: 43px;
   line-height: 43px;
   border-radius: 0;
+  float: right;
 }
 
 .two-questions #first .answer

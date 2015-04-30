@@ -153,7 +153,7 @@ angular
         input.style['background-image'] = 'url(../img/or-left.png)';
       else {
         input.style.width = input.clientWidth - $scope.x + 'px';
-        input.style['margin-left'] = $scope.table.clientWidth - input.clientWidth + 'px';
+        // input.style['margin-left'] = $scope.table.clientWidth - input.clientWidth + 'px';
       }
     }
 
@@ -164,7 +164,7 @@ angular
         var input = $scope.first.getElementsByTagName('input')[0];
         input.style.display = 'inline-block';
         input.style.width = -$scope.x + 'px';
-        input.style['margin-left'] = $scope.table.clientWidth + $scope.x + 'px';
+        // input.style['margin-left'] = $scope.table.clientWidth + $scope.x + 'px';
         return;
       }
 
@@ -221,7 +221,7 @@ angular
     input.style['background-image'] = 'none';
     input.style.display = 'inline-block';
     input.style.width = '';
-    input.style['margin-left'] = '';
+    // input.style['margin-left'] = '';
 
     $scope.second.style.display = 'none';
     Wizard.data.type = 1;
@@ -233,7 +233,7 @@ angular
     input.style['background-image'] = 'url(../img/or-left.png)';
     input.style.display = 'inline-block';
     input.style.width = '';
-    input.style['margin-left'] = '';
+    // input.style['margin-left'] = '';
     $scope.second.style.width = '50%';
     $scope.second.style.display = 'inline-block';
     Wizard.data.type = 2;
