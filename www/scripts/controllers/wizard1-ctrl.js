@@ -155,7 +155,7 @@ angular
 
     if (Wizard.data.type == 1) {
       if ($scope.x < 0)
-        $scope.firstInput.style['background-image'] = 'url(../img/or-left.png)';
+        $scope.firstInput.style.backgroundImage = 'url(img/or-left.png)';
       else {
         $scope.firstInput.style.width = $scope.firstInput.clientWidth - $scope.x + 'px';
       }
@@ -217,7 +217,7 @@ angular
   };
 
   $scope.switch1 = function() {
-    $scope.firstInput.style['background-image'] = 'none';
+    $scope.firstInput.style.backgroundImage = 'none';
     $scope.firstInput.style.display = 'inline-block';
     $scope.firstInput.style.width = '';
     $scope.first.style.width = '100%';
@@ -226,7 +226,7 @@ angular
   };
 
   $scope.switch2 = function() {
-    $scope.firstInput.style['background-image'] = 'url(../img/or-left.png)';
+    $scope.firstInput.style.backgroundImage = 'url(img/or-left.png)';
     $scope.firstInput.style.display = 'inline-block';
     $scope.firstInput.style.width = '';
     $scope.first.style.width = '50%';

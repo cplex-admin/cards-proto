@@ -17,20 +17,20 @@ angular
         , answers: ['Гоголь', 'Булгаков']
         , type: 0
       }
-      , {
-          avatar: 'img/avatars/270026_55301847190b2.jpg'
-        , question: 'Могу ли я сесть на шпагат?'
-        , answers: ['Могу', 'Нет, не могу']
-        , pictures: ['img/pics/3-1.jpg', 'img/pics/3-2.jpg']
-        , type: 2
-      }
-      , {
-          avatar: 'img/avatars/270030_55301da729be4.jpg'
-        , question: 'Как принять решение?'
-        , answers: ['Все взвесить', 'Бросить монетку']
-        , pictures: ['img/pics/4-1.jpg', 'img/pics/4-2.jpg']
-        , type: 2
-      }
+      // , {
+      //     avatar: 'img/avatars/270026_55301847190b2.jpg'
+      //   , question: 'Могу ли я сесть на шпагат?'
+      //   , answers: ['Могу', 'Нет, не могу']
+      //   , pictures: ['img/pics/3-1.jpg', 'img/pics/3-2.jpg']
+      //   , type: 2
+      // }
+      // , {
+      //     avatar: 'img/avatars/270030_55301da729be4.jpg'
+      //   , question: 'Как принять решение?'
+      //   , answers: ['Все взвесить', 'Бросить монетку']
+      //   , pictures: ['img/pics/4-1.jpg', 'img/pics/4-2.jpg']
+      //   , type: 2
+      // }
       , {
           avatar: 'img/avatars/270031_55301ffa0c82e.jpg'
         , question: 'Женственный стиль в одежде или свободный?'
@@ -45,13 +45,13 @@ angular
         , pictures: ['img/pics/6-1.jpg', 'img/pics/6-2.jpg']
         , type: 2
       }
-      , {
-          avatar: 'img/avatars/270037_55302b4d3ba6c.jpg'
-        , question: 'Если немец, то?'
-        , answers: ['BMW', 'Mercedes']
-        , pictures: ['img/pics/7-1.jpg', 'img/pics/7-2.jpg']
-        , type: 2
-      }
+      // , {
+      //     avatar: 'img/avatars/270037_55302b4d3ba6c.jpg'
+      //   , question: 'Если немец, то?'
+      //   , answers: ['BMW', 'Mercedes']
+      //   , pictures: ['img/pics/7-1.jpg', 'img/pics/7-2.jpg']
+      //   , type: 2
+      // }
       , {
           avatar: 'img/avatars/270040_55302da943548.jpg'
         , question: 'To drink?'

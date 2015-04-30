@@ -144,7 +144,7 @@ angular
       // $scope.titleBar.style.top = 0;
       $scope.commentBar.style.bottom = 0;
       $scope.commentBar.getElementsByTagName('input')[0].focus();
-      $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = (window.innerHeight - 44 - 85) + 'px';
+      $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = (window.innerHeight - 44 - 90) + 'px';
 
       var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel-' + $scope.currIdx);
       $ionicScrollDelegate.freezeScroll(false);
@@ -167,11 +167,11 @@ angular
     //$scope.titleBar.classList.remove('chat-header');
     $scope.commentBar.style.bottom = '-100px';
     $scope.commentBar.getElementsByTagName('input')[0].blur();
-    $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = '295px';
+    $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = '313px';
 
     var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel-' + $scope.currIdx);
     viewScroll.scrollTop(false);
-    viewScroll.freezeScroll(true);
+    $ionicScrollDelegate.freezeAllScrolls(true);
 
     var imgTable = $scope.card.find('.images').get(0)
     imgTable.style.width = '';
