@@ -417,6 +417,7 @@ body, button
   width: 84%;
   margin: 0 8%;
   height: 200px;
+  z-index: 1000;
 }
 
 .two-questions
