@@ -5,6 +5,11 @@ angular
   $scope.wizard = Wizard;
 
   $scope.cards = function() {
+    if ($scope.suggestions.length > 0) {
+      $scope.suggestions = [];
+      return;
+    }
+
     $ionicViewSwitcher.nextDirection('back');
     $state.go("cards.list");
     $scope.switch2();
@@ -143,17 +148,16 @@ angular
   };
 
   $scope.first = $('#first').get(0);
+  $scope.firstInput = $scope.first.getElementsByTagName('input')[0];
   $scope.second = $('#second').get(0);
   $scope._doDrag = function(e) {
     $scope.x = (e.gesture.deltaX);
 
     if (Wizard.data.type == 1) {
-      var input = $scope.first.getElementsByTagName('input')[0];
       if ($scope.x < 0)
-        input.style['background-image'] = 'url(../img/or-left.png)';
+        $scope.firstInput.style['background-image'] = 'url(../img/or-left.png)';
       else {
-        input.style.width = input.clientWidth - $scope.x + 'px';
-        // input.style['margin-left'] = $scope.table.clientWidth - input.clientWidth + 'px';
+        $scope.firstInput.style.width = $scope.firstInput.clientWidth - $scope.x + 'px';
       }
     }
 
@@ -161,10 +165,8 @@ angular
       if ($scope.x > 0)
         return;
       else {
-        var input = $scope.first.getElementsByTagName('input')[0];
-        input.style.display = 'inline-block';
-        input.style.width = -$scope.x + 'px';
-        // input.style['margin-left'] = $scope.table.clientWidth + $scope.x + 'px';
+        $scope.firstInput.style.display = 'inline-block';
+        $scope.firstInput.style.width = -$scope.x + 'px';
         return;
       }
 
@@ -208,32 +210,26 @@ angular
   };
 
   $scope.switch0 = function() {
+    $scope.firstInput.style.display = 'none';
     $scope.first.style.width = '100%';
-    $scope.first.getElementsByTagName('input')[0].style['background-image'] = 'none';
-    $scope.first.getElementsByTagName('input')[0].style.display = 'none';
     $scope.second.style.display = 'none';
     Wizard.data.type = 0;
   };
 
   $scope.switch1 = function() {
+    $scope.firstInput.style['background-image'] = 'none';
+    $scope.firstInput.style.display = 'inline-block';
+    $scope.firstInput.style.width = '';
     $scope.first.style.width = '100%';
-    var input = $scope.first.getElementsByTagName('input')[0];
-    input.style['background-image'] = 'none';
-    input.style.display = 'inline-block';
-    input.style.width = '';
-    // input.style['margin-left'] = '';
-
     $scope.second.style.display = 'none';
     Wizard.data.type = 1;
   };
 
   $scope.switch2 = function() {
+    $scope.firstInput.style['background-image'] = 'url(../img/or-left.png)';
+    $scope.firstInput.style.display = 'inline-block';
+    $scope.firstInput.style.width = '';
     $scope.first.style.width = '50%';
-    var input = $scope.first.getElementsByTagName('input')[0];
-    input.style['background-image'] = 'url(../img/or-left.png)';
-    input.style.display = 'inline-block';
-    input.style.width = '';
-    // input.style['margin-left'] = '';
     $scope.second.style.width = '50%';
     $scope.second.style.display = 'inline-block';
     Wizard.data.type = 2;
