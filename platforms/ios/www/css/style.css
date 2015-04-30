@@ -457,16 +457,6 @@ body, button
   line-height: 34px;
 }
 
-/*.two-questions tr:last-child
-{
-  background-color: #468edb;
-}
-
-.two-questions tr:last-child td
-{
-  background: transparent url(../img/or.png) center center no-repeat;
-}*/
-
 .two-questions .answer
 {
   text-align: center;
@@ -492,7 +482,7 @@ body, button
 .two-questions.right-answer-select .image-holder .overlay
 {
   background-color: rgba(100, 155, 55, 0.5);
-  height: 230px;
+  height: 232px;
 }
 
 .two-questions.right-answer-select .image-holder img

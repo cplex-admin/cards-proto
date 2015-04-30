@@ -36,16 +36,20 @@ angular
   };
 
   $scope.isFilled = function() {
-    return  (
-              Wizard.data.pictures.length == 2
-              && Wizard.data.pictures[0]
-              && Wizard.data.pictures[1]
-              && Wizard.data.type == 2
-            )
-            ||
+    return  Wizard.data.question
+            &&
             (
-              Wizard.data.pictures[0]
-              && (Wizard.data.type == 0 || Wizard.data.type == 1)
+              (
+                Wizard.data.pictures.length == 2
+                && Wizard.data.pictures[0]
+                && Wizard.data.pictures[1]
+                && Wizard.data.type == 2
+              )
+              ||
+              (
+                Wizard.data.pictures[0]
+                && (Wizard.data.type == 0 || Wizard.data.type == 1)
+              )
             );
   };
 
