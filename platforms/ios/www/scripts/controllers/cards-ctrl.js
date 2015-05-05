@@ -42,7 +42,7 @@ angular
   $scope.card = undefined;
   $scope.cardWidth = undefined;
   $scope.wrapper = $('.qcards-wrapper')[0];
-  $scope.titleBar = $('.bar-header')[0];
+  // $scope.titleBar = $('.bar-header')[0];
   $scope.commentBar = $('.bar-footer')[0];
   $scope.commentInput = $scope.commentBar.getElementsByTagName('input')[0];
   $scope.wWidth = window.innerWidth
@@ -137,6 +137,7 @@ angular
     }, $scope.animDuration);
 
     $timeout(function() {
+      $scope.commentBar.style.bottom = 0;
       $scope.commentInput.onkeypress = $scope.watch13;
       $scope.commentInput.onfocus = $scope.resizeScrollPanel;
       $scope.commentInput.onblur = $scope.resizeScrollPanel;
@@ -146,7 +147,7 @@ angular
 
   $scope.watch13 = function(e) {
     if (e.keyCode == 13) {
-      $scope.addComment(100);
+      $scope.sendComment();
     }
   };
 
@@ -157,7 +158,7 @@ angular
     $ionicScrollDelegate.freezeScroll(false);
     viewScroll.scrollBottom(true);
 
-    if ($scope.commentBar.style.bottom = '0px')
+    if ($scope.commentBar.style.bottom == '0px')
       $scope.commentBar.style.bottom = (window.innerHeight - 62) + 'px';
     else
       $scope.commentBar.style.bottom = 0;
@@ -186,6 +187,7 @@ angular
     imgTable.style['margin-left'] = '';
 
     $scope.wrapper.classList.remove('full-screen');
+    $scope.card.get(0).classList.remove('chat-header');
     $scope.card.animate({
       marginTop: "10%",
       marginLeft: ($scope.currIdx == 0) ? "7%" : "1.5%",
@@ -217,6 +219,8 @@ angular
   };
 
   $scope.sendComment = function() {
+    $scope.card.get(0).classList.add('chat-header');
+
     if ($scope.cards[$scope.currIdx].comments && $scope.cards[$scope.currIdx].comments.length > 0) {
       $scope.addComment(100);
       return;
