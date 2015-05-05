@@ -45,8 +45,6 @@ angular
   $scope.titleBar = $('.bar-header')[0];
   $scope.commentBar = $('.bar-footer')[0];
   $scope.commentInput = $scope.commentBar.getElementsByTagName('input')[0];
-  $scope.commentInput.onfocus = $scope.resizeScrollPanel;
-  $scope.commentInput.onblur = $scope.resizeScrollPanel;
   $scope.wWidth = window.innerWidth
                   || document.documentElement.clientWidth
                   || document.body.clientWidth;
@@ -139,11 +137,17 @@ angular
     }, $scope.animDuration);
 
     $timeout(function() {
-      $scope.commentBar.style.bottom = 0;
+      $scope.commentInput.onkeypress = $scope.watch13;
       $scope.commentInput.onfocus = $scope.resizeScrollPanel;
       $scope.commentInput.onblur = $scope.resizeScrollPanel;
       $scope.commentInput.focus();
     }, $scope.animDuration + 100);
+  };
+
+  $scope.watch13 = function(e) {
+    if (e.keyCode == 13) {
+      $scope.addComment(100);
+    }
   };
 
   $scope.resizeScrollPanel = function() {
@@ -152,6 +156,11 @@ angular
     var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel-' + $scope.currIdx);
     $ionicScrollDelegate.freezeScroll(false);
     viewScroll.scrollBottom(true);
+
+    if ($scope.commentBar.style.bottom = '0px')
+      $scope.commentBar.style.bottom = (window.innerHeight - 62) + 'px';
+    else
+      $scope.commentBar.style.bottom = 0;
   };
 
   $scope.collapse = function() {
@@ -164,8 +173,8 @@ angular
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
 
+    $scope.commentInput.blur();
     $scope.commentBar.style.bottom = '-100px';
-    $scope.commentBar.getElementsByTagName('input')[0].blur();
     $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = '313px';
 
     var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel-' + $scope.currIdx);
@@ -203,7 +212,7 @@ angular
     $timeout(function() {
       var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel-' + $scope.currIdx);
       viewScroll.scrollBottom(true);
-      $scope.commentBar.getElementsByTagName('input')[0].focus();
+      // $scope.commentBar.getElementsByTagName('input')[0].focus();
     }, delay);
   };
 
