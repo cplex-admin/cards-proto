@@ -54,10 +54,15 @@ body, button
 .qcard
 {
   display: inline-block;
-  width: 80%;
-  margin: 10% 2.5% 0 2.5%;
+  width: 86%;
+  margin: 10% 1.5% 0 1.5%;
   vertical-align: top;
   border-radius: 10px;
+}
+
+.qcard:first-child
+{
+  margin-left: 7%;
 }
 
 .qcards-wrapper.full-screen .qcard
@@ -70,11 +75,6 @@ body, button
 .qcards-wrapper.full-screen .qcard ul
 {
   padding-top: 10px;
-}
-
-.qcard:first-child
-{
-  margin-left: 10%;
 }
 
 .qcard .title

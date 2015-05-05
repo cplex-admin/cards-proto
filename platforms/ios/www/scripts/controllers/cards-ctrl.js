@@ -44,6 +44,9 @@ angular
   $scope.wrapper = $('.qcards-wrapper')[0];
   $scope.titleBar = $('.bar-header')[0];
   $scope.commentBar = $('.bar-footer')[0];
+  $scope.commentInput = $scope.commentBar.getElementsByTagName('input')[0];
+  $scope.commentInput.onfocus = $scope.resizeScrollPanel;
+  $scope.commentInput.onblur = $scope.resizeScrollPanel;
   $scope.wWidth = window.innerWidth
                   || document.documentElement.clientWidth
                   || document.body.clientWidth;
@@ -64,10 +67,8 @@ angular
   };
 
   $scope._doDrag = function(e) {
-    if ($scope.state == 1) {
-      console.log('_doDrag: wrong state');
+    if ($scope.state == 1)
       return;
-    }
 
     if ($scope.card === undefined) {
       $scope.card = $scope.getCard($scope.currIdx);
@@ -80,20 +81,17 @@ angular
   };
 
   $scope._doDragEnd = function(e) {
-    if ($scope.state == 1) {
-      console.log('_doDragEnd: wrong state');
+    if ($scope.state == 1)
       return;
-    }
     
     $scope.card.get(0).style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.card.get(0).style[ionic.CSS.TRANSFORM] = 'translateY(0px)';
 
-    if ($scope.x > 50 && $scope.currIdx > 0) {
+    if ($scope.x > 50 && $scope.currIdx > 0)
       $scope.currIdx--;
-    }
-    else if ($scope.x < -50 && $scope.currIdx < $scope.cards.length - 1) {
+    
+    else if ($scope.x < -50 && $scope.currIdx < $scope.cards.length - 1)
       $scope.currIdx++;
-    }
 
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
@@ -106,7 +104,7 @@ angular
   };
 
   $scope.getOffsetX = function() {
-    return - 85 * $scope.cardWidth / 80 * $scope.currIdx;
+    return (- $scope.wWidth + $scope.wWidth * 0.11) * $scope.currIdx;
   };
 
   $scope.getCard = function(idx) {
@@ -128,11 +126,11 @@ angular
 
     var offsetX = $scope.getOffsetX()
     if ($scope.currIdx != 0)
-      offsetX -= $scope.cardWidth * 0.1;
+      offsetX -= $scope.cardWidth * 0.064;
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
-    $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';
-    
+    $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + offsetX + 'px)';    
     $scope.wrapper.classList.add('full-screen');
+
     $scope.card.animate({
       marginTop: "0",
       marginLeft: "0",
@@ -141,15 +139,19 @@ angular
     }, $scope.animDuration);
 
     $timeout(function() {
-      // $scope.titleBar.style.top = 0;
       $scope.commentBar.style.bottom = 0;
-      $scope.commentBar.getElementsByTagName('input')[0].focus();
-      $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = (window.innerHeight - 44 - 90) + 'px';
-
-      var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel-' + $scope.currIdx);
-      $ionicScrollDelegate.freezeScroll(false);
-      viewScroll.scrollBottom(true);
+      $scope.commentInput.onfocus = $scope.resizeScrollPanel;
+      $scope.commentInput.onblur = $scope.resizeScrollPanel;
+      $scope.commentInput.focus();
     }, $scope.animDuration + 100);
+  };
+
+  $scope.resizeScrollPanel = function() {
+    $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = (window.innerHeight - 44 - 90) + 'px';
+    
+    var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel-' + $scope.currIdx);
+    $ionicScrollDelegate.freezeScroll(false);
+    viewScroll.scrollBottom(true);
   };
 
   $scope.collapse = function() {
@@ -162,9 +164,6 @@ angular
     $scope.wrapper.style[TRANSITION] = '-webkit-transform ' + $scope.animDuration / 1000 + 's';
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
 
-
-    //$scope.titleBar.style.top = '-100px';
-    //$scope.titleBar.classList.remove('chat-header');
     $scope.commentBar.style.bottom = '-100px';
     $scope.commentBar.getElementsByTagName('input')[0].blur();
     $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = '313px';
@@ -180,9 +179,9 @@ angular
     $scope.wrapper.classList.remove('full-screen');
     $scope.card.animate({
       marginTop: "10%",
-      marginLeft: ($scope.currIdx == 0) ? "10%" : "2.5%",
-      height: "80%",
-      width: "80%",
+      marginLeft: ($scope.currIdx == 0) ? "7%" : "1.5%",
+      height: "90%",
+      width: "86%",
     }, $scope.animDuration);
   };
 
@@ -218,7 +217,6 @@ angular
       width: '70%',
       'margin-left': '28%'
     }, 100, function(){
-      //$scope.titleBar.classList.add('chat-header');
       if (!$scope.cards[$scope.currIdx].comments) {
         $scope.cards[$scope.currIdx].comments = [];
       }
