@@ -31,7 +31,8 @@ angular
 })
 
 
-.config(function ($stateProvider, $urlRouterProvider, $compileProvider){
+.config(function ($stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider){
+    $ionicConfigProvider.tabs.position('top');
     $stateProvider
       .state('cards', {
           abstract: true,
@@ -46,6 +47,7 @@ angular
               }
           }
       })
+
       .state('standard', {
           abstract: true,
           templateUrl: "views/layouts/standard.html"
@@ -77,6 +79,49 @@ angular
               }
           }
       })
+      .state('standard.profile', {
+          url: "/profile",
+          views: {
+              'content': {
+                  templateUrl: "views/profile.html",
+                  controller: "ProfileCtrl"
+              }
+          }
+      })
+
+
+      .state('tabs', {
+          abstract: true,
+          templateUrl: "views/layouts/tabs.html"
+      })
+      .state('tabs.chats', {
+          url: "/chats",
+          views: {
+              'tab-chats': {
+                  templateUrl: "views/chats.html",
+                  controller: "ChatsCtrl"
+              }
+          }
+      })
+      .state('tabs.notifications', {
+          url: "/notifications",
+          views: {
+              'tab-notifications': {
+                  templateUrl: "views/notifications.html",
+                  controller: "NotificationsCtrl"
+              }
+          }
+      })
+      .state('tabs.people', {
+          url: "/people",
+          views: {
+              'tab-people': {
+                  templateUrl: "views/people.html",
+                  controller: "PeopleCtrl"
+              }
+          }
+      })
+
 
       ;
 

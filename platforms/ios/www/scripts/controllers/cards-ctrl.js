@@ -257,6 +257,11 @@ angular
     Wizard.data.pictures[0] = uri;
   };
 
+  $scope.go = function(path) {
+    $ionicViewSwitcher.nextDirection('forward');
+    $state.go(path);
+  };
+
   $scope.bindEvents();
 
 })
