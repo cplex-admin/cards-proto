@@ -8,16 +8,15 @@
   src: url('fonts/HelveticaNeueCyr-Roman.otf');
 }
 
-body, button
+body, button, .tab-item
 {
   font-family: 'HelveticaNeueCyr-Roman' !important;
 }
 
 .bg
 {
-  background: #314e82 url(../img/bg-rad.jpg) left top repeat-y;
+  background: #314e82 url(../img/bg-rad.jpg) left top no-repeat;
   background-position: center center;
-  background-repeat: no-repeat;
   background-size: cover;
 }
 
@@ -543,3 +542,110 @@ body, button
 }
 
 
+
+
+[nav-bar-transition="ios"] [nav-bar="active"] .bar.bar-dark.bar-actions,
+[nav-bar-transition="ios"] [nav-bar="entering"] .bar.bar-dark.bar-actions
+{
+  background: #314e82 url(../img/bg-rad.jpg) left top no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.tabs-striped .tab-item.tab-item-active
+{
+  border-color: #5f8ed7;
+}
+
+.bar-dark.bar-actions .ion-ios-compose-outline:before
+{
+  font-size: 25px;
+}
+
+.tabs-icon-left.tabs .tab-item .icon:before,
+.tabs-icon-left > .tabs .tab-item .icon:before
+{
+  font-size: 30px;
+}
+
+.tabs-icon-left .tab-item span
+{
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.notif .item
+{
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+}
+
+.notif .item.item-divider
+{
+  border: none;
+  min-height: 20px;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 20px;
+  font-size: 15px;
+  background-color: #dadada;
+}
+
+.notif .item-divider a
+{
+  float: right;
+  color: #929292;
+}
+
+.notif .item
+{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #fff;
+}
+
+.notif .item.new
+{
+  background-color: #f7f7f7;
+}
+
+.notif .item img.action
+{
+  position: absolute;
+  top: 43px;
+  left: 43px;
+  max-width: 18px;
+  max-height: 18px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.notif .item p
+{
+  text-overflow: none;
+  white-space: normal;
+}
+
+.notif .item .name
+{
+  color: #5874a5;
+}
+
+.notif .item .action
+{  
+  color: #666666;
+}
+
+.notif .item .date
+{
+  color: #8b8b8b;
+  font-size: 13px;
+}
+
+.notif .item i img
+{
+  max-height: 50px;
+  max-width: 50px;
+}

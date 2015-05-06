@@ -79,20 +79,11 @@ angular
               }
           }
       })
-      .state('standard.profile', {
-          url: "/profile",
-          views: {
-              'content': {
-                  templateUrl: "views/profile.html",
-                  controller: "ProfileCtrl"
-              }
-          }
-      })
-
 
       .state('tabs', {
           abstract: true,
-          templateUrl: "views/layouts/tabs.html"
+          templateUrl: "views/layouts/tabs.html",
+          controller: "TabsCtrl"
       })
       .state('tabs.chats', {
           url: "/chats",
@@ -103,12 +94,12 @@ angular
               }
           }
       })
-      .state('tabs.notifications', {
-          url: "/notifications",
+      .state('tabs.notif', {
+          url: "/notif",
           views: {
-              'tab-notifications': {
-                  templateUrl: "views/notifications.html",
-                  controller: "NotificationsCtrl"
+              'tab-notif': {
+                  templateUrl: "views/notif.html",
+                  controller: "NotifCtrl"
               }
           }
       })

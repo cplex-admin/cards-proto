@@ -1,0 +1,29 @@
+<ion-view title="Действия">
+  <ion-content class="notif">
+
+
+    <div class="list">
+
+      <div class="item item-divider">Подписчики<a>Сортировка</a></div>
+
+      <a class="item item-avatar item-icon-right" ng-class="{new: item.isNew}" href="#" ng-repeat="item in items">
+        <img src="{{item.avatar}}">
+        <img ng-show="item.action == actions[0]" class="action" src="img/notif-share.png">
+        <img ng-show="item.action == actions[1]" class="action" src="img/notif-like.png">
+        <img ng-show="item.action == actions[2]" class="action" src="img/notif-quest.png">
+        <p>
+          <span class="name">{{item.name}}</span> <span class="action">{{item.action}}</span><br/>
+          <span class="date">{{item.date}}</span>
+        </p>
+        <i class="icon">
+          <img src="{{item.imgs[0]}}">
+        </i>
+      </a>
+
+      <div class="item item-divider">Остальные</div>
+
+    </div>
+
+
+  </ion-content>
+</ion-view>

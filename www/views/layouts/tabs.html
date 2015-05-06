@@ -1,14 +1,27 @@
-<ion-nav-bar class="bar-dark">
-  <ion-nav-back-button class="button-icon button-clear ion-chevron-left"></ion-nav-back-button>
-</ion-nav-bar>
-<ion-tabs class="tabs-striped">
-  <ion-tab href="/chats" title="Чаты">
-    <ion-nav-view name="tab-chats"></ion-nav-view>
-  </ion-tab>
-  <ion-tab href="/notifications" title="Уведомления">
-    <ion-nav-view name="tab-notifications"></ion-nav-view>
-  </ion-tab>
-  <ion-tab href="/people" title="Люди">
-    <ion-nav-view name="tab-people"></ion-nav-view>
-  </ion-tab>
-</ion-tabs>
+<ion-view title="Действия">
+
+  <ion-nav-bar class="bar-dark bar-actions">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-chevron-left" ng-click="cards()"></button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+      <button class="button button-icon button-clear ion-ios-compose-outline"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-tabs class="tabs-striped tabs-icon-left">
+    <ion-tab href="/chats" title="Чаты" icon="ion-ios-chatbubble-outline">
+      <ion-nav-view name="tab-chats"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab href="/notif" title="Уведомления" icon="ion-ios-bell-outline">
+      <ion-nav-view name="tab-notif"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab href="/people" title="Люди" icon="ion-ios-person-outline">
+      <ion-nav-view name="tab-people"></ion-nav-view>
+    </ion-tab>
+  </ion-tabs>
+
+</ion-view>
