@@ -137,7 +137,7 @@ angular
     }, $scope.animDuration);
 
     $timeout(function() {
-      $scope.commentBar.style.bottom = 0;
+      $scope.commentBar.style.bottom = '0px';
       $scope.commentInput.onkeypress = $scope.watch13;
       $scope.commentInput.onfocus = $scope.resizeScrollPanel;
       $scope.commentInput.onblur = $scope.resizeScrollPanel;

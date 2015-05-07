@@ -2,12 +2,14 @@ angular
 .module("cards")
 .controller('NotifCtrl', function($scope, Cards) {
 
+  $scope.subsCount = 2;
+  $scope.sortByPeople = true;
   $scope.items = [];
 
   $scope.fnames  = [ 'Игорь', 'Фарход', 'Алексей', 'Дмитрий', 'Петр', 'Сергей' ];
   $scope.lnames  = [ 'Иванов', 'Петров', 'Сидоров', 'Герасименко', 'Шадиев', 'Чингуль' ];
   $scope.actions = [ 'поделился Вашей угадайкой', 'оценил Вашу фотографию', 'угадал три Ваших угадайки' ];
-  $scope.months  = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+  $scope.months  = [ 'янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек' ];
 
   $scope.$on('$ionicView.enter', function() {
     // check size and clean up
@@ -25,6 +27,8 @@ angular
     for (var i = 0; i < n; i++) {
       $scope.items.unshift($scope.generateItem());
     }
+
+    $scope.subsCount = $scope.getRandomInt(2, 5);
   });
 
   $scope.getRandomInt = function(min, max) {

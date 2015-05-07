@@ -4,23 +4,27 @@
 
     <div class="list">
 
-      <div class="item item-divider">Подписчики<a>Сортировка</a></div>
+      <div class="item item-divider">{{(sortByPeople) ? 'Подписчики': 'Дата'}}<a ng-click="sortByPeople = !sortByPeople">Сортировка</a></div>
 
-      <a class="item item-avatar item-icon-right" ng-class="{new: item.isNew}" href="#" ng-repeat="item in items">
-        <img src="{{item.avatar}}">
-        <img ng-show="item.action == actions[0]" class="action" src="img/notif-share.png">
-        <img ng-show="item.action == actions[1]" class="action" src="img/notif-like.png">
-        <img ng-show="item.action == actions[2]" class="action" src="img/notif-quest.png">
-        <p>
-          <span class="name">{{item.name}}</span> <span class="action">{{item.action}}</span><br/>
-          <span class="date">{{item.date}}</span>
-        </p>
-        <i class="icon">
-          <img src="{{item.imgs[0]}}">
-        </i>
-      </a>
+      <div ng-repeat="item in items track by $index">
+        <a class="item item-avatar item-icon-right"
+            ng-class="{new: item.isNew}"
+            href="#">
+          <img src="{{item.avatar}}">
+          <img ng-show="item.action == actions[0]" class="action" src="img/notif-share.png">
+          <img ng-show="item.action == actions[1]" class="action" src="img/notif-like.png">
+          <img ng-show="item.action == actions[2]" class="action" src="img/notif-quest.png">
+          <p>
+            <span class="name">{{item.name}}</span> <span class="action">{{item.action}}</span><br/>
+            <span class="date">{{item.date}}</span>
+          </p>
+          <i class="icon">
+            <img src="{{item.imgs[0]}}">
+          </i>
+        </a>
+        <div ng-show="sortByPeople && $index == subsCount" class="item item-divider">Остальные</div>
+      </div>
 
-      <div class="item item-divider">Остальные</div>
 
     </div>
 

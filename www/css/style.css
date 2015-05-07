@@ -548,7 +548,6 @@ body, button, .tab-item
 [nav-bar-transition="ios"] [nav-bar="entering"] .bar.bar-dark.bar-actions
 {
   background: #314e82 url(../img/bg-rad.jpg) left top no-repeat;
-  background-position: center center;
   background-size: cover;
 }
 
@@ -557,21 +556,27 @@ body, button, .tab-item
   border-color: #5f8ed7;
 }
 
-.bar-dark.bar-actions .ion-ios-compose-outline:before
+.tabs-striped .tab-item
 {
-  font-size: 25px;
+  padding-left: 10px;
 }
 
-.tabs-icon-left.tabs .tab-item .icon:before,
-.tabs-icon-left > .tabs .tab-item .icon:before
+.tabs-striped .tab-item.chats
 {
-  font-size: 30px;
+
+  background: transparent url(../img/tab-chats.png) 7px center no-repeat;
 }
 
-.tabs-icon-left .tab-item span
+.tabs-striped .tab-item.notif
 {
-  font-size: 15px;
-  margin-left: 5px;
+  padding-left: 35px;
+  background: transparent url(../img/tab-notif.png) 7px center no-repeat;
+}
+
+.tabs-striped .tab-item.people
+{
+
+  background: transparent url(../img/tab-people.png) 7px center no-repeat;
 }
 
 .notif .item
