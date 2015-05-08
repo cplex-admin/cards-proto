@@ -1,6 +1,6 @@
 angular
 .module("cards")
-.controller('NotifCtrl', function($scope, Cards) {
+.controller('NotifCtrl', function($scope, Cards, $filter) {
 
   $scope.subsCount = 2;
   $scope.sortByPeople = true;
@@ -13,8 +13,12 @@ angular
 
   $scope.$on('$ionicView.enter', function() {
     // check size and clean up
-    if ($scope.items.length > 10) {
-      $scope.items = [$scope.generateItem()];
+    if ($scope.items.length > 15 || $scope.items.length == 0) {
+      var item = $scope.generateItem();
+      item.date = new Date();
+      item.day = $scope.today;
+      item.isFriend = 1;
+      $scope.items = [item];
     }
 
     // mark old
@@ -28,7 +32,9 @@ angular
       $scope.items.unshift($scope.generateItem());
     }
 
-    $scope.subsCount = $scope.getRandomInt(2, 5);
+    $scope.items = $filter('orderBy')($scope.items, '-date');
+    $scope.items[0].isNew = true;
+    $scope.items[1].isNew = true;
   });
 
   $scope.getRandomInt = function(min, max) {
@@ -40,22 +46,42 @@ angular
   };
 
   $scope.generateDate = function() {
-    return $scope.getRandomInt(1, 28) + ' '
-            + $scope.months[$scope.getRandomInt(0, $scope.months.length )]+ ' '
-            + $scope.getRandomInt(0, 24) + ':' + $scope.getRandomInt(0, 59);
+    var start = new Date(2015, 4, 3),
+        end = new Date();
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
   };
 
   $scope.generateItem = function() {
     var cardsLength = Cards.data.length;
+    var date = $scope.generateDate();
     var item = {
       avatar: Cards.data[$scope.getRandomInt(0, cardsLength)].avatar,
       action: $scope.actions[$scope.getRandomInt(0, $scope.actions.length)],
       name: $scope.generateName(),
-      date: $scope.generateDate(),
+      date: date,
+      day: date.getDate(),
       imgs: [Cards.data[$scope.getRandomInt(0, cardsLength)].pictures[0]],
-      isNew: true
+      isNew: false,
+      isFriend: $scope.getRandomInt(0, 2)
     };
     return item;
+  };
+
+  $scope.sort = ['isFriend', '-date'];
+  $scope.filter0 = {isFriend: 1};
+  $scope.filter1 = {isFriend: 0};
+  $scope.today = new Date().getDate();
+  $scope.toggleSort = function() {
+
+    if ($scope.sort[0] == 'isFriend') {
+      $scope.sort = ['-date', 'isFriend'];
+      $scope.filter0 = {day: $scope.today};
+      $scope.filter1 = {day: '!' + $scope.today};
+    } else {
+      $scope.sort = ['isFriend', '-date'];
+      $scope.filter0 = {isFriend: 1};
+      $scope.filter1 = {isFriend: 0};
+    }
   };
 
 })

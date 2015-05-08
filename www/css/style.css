@@ -558,7 +558,8 @@ body, button, .tab-item
 
 .tabs-striped .tab-item
 {
-  padding-left: 10px;
+  padding-left: 20px;
+  padding-right: 7px;
 }
 
 .tabs-striped .tab-item.chats
@@ -593,7 +594,7 @@ body, button, .tab-item
   padding-top: 0;
   padding-bottom: 0;
   line-height: 20px;
-  font-size: 15px;
+  font-size: 14px;
   background-color: #dadada;
 }
 
