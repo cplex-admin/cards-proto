@@ -258,7 +258,7 @@ angular
   };
 
   $scope.go = function(path) {
-    $ionicViewSwitcher.nextDirection('forward');
+    $ionicViewSwitcher.nextDirection('none');
     $state.go(path);
   };
 

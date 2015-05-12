@@ -551,6 +551,10 @@ body, button, .tab-item
 
 
 
+.bar .button.button-icon.ion-ios-compose-outline:before
+{
+  font-size: 26px;
+}
 
 [nav-bar-transition="ios"] [nav-bar="active"] .bar.bar-dark.bar-actions,
 [nav-bar-transition="ios"] [nav-bar="entering"] .bar.bar-dark.bar-actions
@@ -572,20 +576,12 @@ body, button, .tab-item
 
 .tabs-striped .tab-item.chats
 {
-
-  background: transparent url(../img/tab-chats.png) 7px center no-repeat;
+  background: transparent url(../img/tab-chats.png) 24px center no-repeat;
 }
 
 .tabs-striped .tab-item.notif
 {
-  padding-left: 35px;
-  background: transparent url(../img/tab-notif.png) 7px center no-repeat;
-}
-
-.tabs-striped .tab-item.people
-{
-
-  background: transparent url(../img/tab-people.png) 7px center no-repeat;
+  background: transparent url(../img/tab-notif.png) 10px center no-repeat;
 }
 
 .notif .item
@@ -614,6 +610,16 @@ body, button, .tab-item
 
 .notif .item
 {
+  padding-right: 11px;
+}
+
+.notif .item-icon-right
+{
+  padding-right: 54px;
+}
+
+.notif .item
+{
   padding-top: 5px;
   padding-bottom: 5px;
   background-color: #fff;
@@ -629,8 +635,8 @@ body, button, .tab-item
   position: absolute;
   top: 43px;
   left: 43px;
-  max-width: 18px;
-  max-height: 18px;
+  max-width: 20px;
+  max-height: 20px;
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -658,8 +664,37 @@ body, button, .tab-item
   font-size: 13px;
 }
 
-.notif .item i img
+.notif .item div.img
 {
-  max-height: 50px;
-  max-width: 50px;
+  height: 45px;
+  width: 45px;
+  background-position: center center;
+  background-size: cover;
+  float: right;
+  margin: 5px 0 5px 10px;
+}
+
+.notif .item i div
+{
+  height: 45px;
+  width: 45px;
+  background-position: center center;
+  background-size: cover;
+}
+
+ion-footer-bar.actions
+{
+  background: #314e82 url(../img/bg-rad.jpg) left bottom no-repeat;
+  background-size: cover;
+}
+
+ion-footer-bar.actions table
+{
+  width: 100%;
+}
+
+ion-footer-bar.actions table td
+{
+  width: 33%;
+  text-align: center;
 }

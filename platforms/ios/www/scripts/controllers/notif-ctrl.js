@@ -53,10 +53,12 @@ angular
 
   $scope.generateItem = function() {
     var cardsLength = Cards.data.length;
+    var actionIdx = $scope.getRandomInt(0, $scope.actions.length);
     var date = $scope.generateDate();
     var item = {
       avatar: Cards.data[$scope.getRandomInt(0, cardsLength)].avatar,
-      action: $scope.actions[$scope.getRandomInt(0, $scope.actions.length)],
+      action: $scope.actions[actionIdx],
+      actionIdx: actionIdx,
       name: $scope.generateName(),
       date: date,
       day: date.getDate(),
@@ -64,6 +66,10 @@ angular
       isNew: false,
       isFriend: $scope.getRandomInt(0, 2)
     };
+    if (item.actionIdx == 2) {
+      item.imgs.push(Cards.data[$scope.getRandomInt(0, cardsLength)].pictures[0]);
+      item.imgs.push(Cards.data[$scope.getRandomInt(0, cardsLength)].pictures[0]);
+    }
     return item;
   };
 
@@ -72,7 +78,6 @@ angular
   $scope.filter1 = {isFriend: 0};
   $scope.today = new Date().getDate();
   $scope.toggleSort = function() {
-
     if ($scope.sort[0] == 'isFriend') {
       $scope.sort = ['-date', 'isFriend'];
       $scope.filter0 = {day: $scope.today};

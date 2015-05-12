@@ -14,14 +14,17 @@
     <ion-tab href="/chats" title="Чаты" class="chats">
       <ion-nav-view name="tab-chats"></ion-nav-view>
     </ion-tab>
-
     <ion-tab href="/notif" title="Уведомления" class="notif">
       <ion-nav-view name="tab-notif"></ion-nav-view>
     </ion-tab>
-
-    <ion-tab href="/people" title="Люди" class="people">
-      <ion-nav-view name="tab-people"></ion-nav-view>
-    </ion-tab>
   </ion-tabs>
+
+  <ion-footer-bar class="actions">
+    <table><tr>
+      <td><a ng-click="go('tabs.people')"><img src="img/peoples.png"></a></td>
+      <td><!-- <a ng-click="takePicture()"><img src="img/add-photo.png"></a> --></td>
+      <td><a ng-click="go('tabs.chats')"><img src="img/dialogs.png"></a></td>
+    </tr></table>
+  </ion-footer-bar>
 
 </ion-view>

@@ -103,17 +103,7 @@ angular
               }
           }
       })
-      .state('tabs.people', {
-          url: "/people",
-          views: {
-              'tab-people': {
-                  templateUrl: "views/people.html",
-                  controller: "PeopleCtrl"
-              }
-          }
-      })
-
-
+      
       ;
 
     $urlRouterProvider.otherwise("/cards");

@@ -1,13 +1,12 @@
 <ion-view title="Действия">
   <ion-content class="notif">
 
-
     <div class="list">
 
       <div class="item item-divider">{{(sort[0] == 'isFriend') ? 'Подписчики': 'Сегодня'}}<a ng-click="toggleSort()">Сортировка</a></div>
 
-      <a class="item item-avatar item-icon-right"
-          ng-class="{new: item.isNew}"
+      <a class="item item-avatar"
+          ng-class="{new: item.isNew, 'item-icon-right': item.actionIdx != 2}"
           href="#"
           ng-repeat="item in items | orderBy:sort | filter:filter0"
           >
@@ -17,17 +16,18 @@
         <img ng-show="item.action == actions[2]" class="action" src="img/notif-quest.png">
         <p>
           <span class="name">{{item.name}}</span> <span class="action">{{item.action}}</span><br/>
-          <span class="date">{{item.date | date:'d MMM в H:mm'}}</span>
+          <span ng-hide="item.actionIdx == 2" class="date">{{item.date | date:'d MMM в H:mm'}}</span>
+          <div class="img" ng-show="item.actionIdx == 2" ng-repeat="img in item.imgs track by $index" ng-style="{'background-image': 'url(' + img + ')'}">&nbsp;</div>
         </p>
-        <i class="icon">
-          <img src="{{item.imgs[0]}}">
+        <i class="icon" ng-hide="item.actionIdx == 2">
+          <div ng-style="{'background-image': 'url(' + item.imgs[0] + ')'}">&nbsp;</div>
         </i>
       </a>
 
       <div class="item item-divider">{{(sort[0] == 'isFriend') ? 'Остальные': 'На этой неделе'}}</div>
 
-      <a class="item item-avatar item-icon-right"
-          ng-class="{new: item.isNew}"
+      <a class="item item-avatar"
+          ng-class="{new: item.isNew, 'item-icon-right': item.actionIdx != 2}"
           href="#"
           ng-repeat="item in items | orderBy:sort | filter:filter1"
           >
@@ -37,10 +37,11 @@
         <img ng-show="item.action == actions[2]" class="action" src="img/notif-quest.png">
         <p>
           <span class="name">{{item.name}}</span> <span class="action">{{item.action}}</span><br/>
-          <span class="date">{{item.date | date:'d MMM в H:mm'}}</span>
+          <span ng-hide="item.actionIdx == 2" class="date">{{item.date | date:'d MMM в H:mm'}}</span>
+          <div class="img" ng-show="item.actionIdx == 2" ng-repeat="img in item.imgs track by $index" ng-style="{'background-image': 'url(' + img + ')'}">&nbsp;</div>
         </p>
-        <i class="icon">
-          <img src="{{item.imgs[0]}}">
+        <i class="icon" ng-hide="item.actionIdx == 2">
+          <div ng-style="{'background-image': 'url(' + item.imgs[0] + ')'}">&nbsp;</div>
         </i>
       </a>
 
