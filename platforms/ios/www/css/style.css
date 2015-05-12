@@ -363,7 +363,7 @@ body, button, .tab-item
 
 .geo
 {
-  margin: 3px 13% 15px 13%;
+  margin: 3px 13% 11px 13%;
   color: #879aab;
   font-size: 11px;
 }
@@ -686,6 +686,7 @@ ion-footer-bar.actions
 {
   background: #314e82 url(../img/bg-rad.jpg) left bottom no-repeat;
   background-size: cover;
+  padding: 5px 0;
 }
 
 ion-footer-bar.actions table
