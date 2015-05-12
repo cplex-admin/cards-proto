@@ -408,6 +408,14 @@ body, button, .tab-item
   color: #3e7dbd;
 }
 
+.bar.bar-dark .title
+{
+  width: 100%;
+  margin: 0;
+  left: 0 !important;
+  right: 0 !important;
+}
+
 .qautocomplete
 {
   height: 100px;

@@ -137,7 +137,7 @@ angular
     }, $scope.animDuration);
 
     $timeout(function() {
-      $scope.commentBar.style.bottom = '0px';
+      $scope.commentBar.style.bottom = 0;
       $scope.commentInput.onkeypress = $scope.watch13;
       $scope.commentInput.onfocus = $scope.resizeScrollPanel;
       $scope.commentInput.onblur = $scope.resizeScrollPanel;
@@ -158,7 +158,7 @@ angular
     $ionicScrollDelegate.freezeScroll(false);
     viewScroll.scrollBottom(true);
 
-    if ($scope.commentBar.style.bottom == '0px')
+    if ($scope.commentBar.style.bottom == '0px' || $scope.commentBar.style.bottom == 0)
       $scope.commentBar.style.bottom = (window.innerHeight - 62) + 'px';
     else
       $scope.commentBar.style.bottom = 0;
