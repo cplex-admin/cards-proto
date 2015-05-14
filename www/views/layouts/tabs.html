@@ -1,10 +1,6 @@
 <ion-view title="Действия">
 
   <ion-nav-bar class="bar-dark bar-actions">
-    <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-chevron-left" ng-click="cards()"></button>
-    </ion-nav-buttons>
-
     <ion-nav-buttons side="right">
       <button class="button button-icon button-clear ion-ios-compose-outline"></button>
     </ion-nav-buttons>
@@ -20,9 +16,13 @@
   </ion-tabs>
 
   <ion-footer-bar class="actions">
+    <div id="disap-bnt">
+      <img src="img/add-photo.png">
+    </div>
+        
     <table><tr>
-      <td><a ng-click="go('tabs.people')"><img src="img/peoples.png"></a></td>
-      <td><!-- <a ng-click="takePicture()"><img src="img/add-photo.png"></a> --></td>
+      <td><a ng-click="go('profile')"><img src="img/peoples.png"></a></td>
+      <td><a ng-click="go('cards.list')"><img src="img/home.png"></a></td>
       <td><a ng-click="go('tabs.chats')"><img src="img/dialogs.png"></a></td>
     </tr></table>
   </ion-footer-bar>

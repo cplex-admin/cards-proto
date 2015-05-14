@@ -104,6 +104,12 @@ angular
           }
       })
       
+
+      .state('profile', {
+          url: "/profile",
+          templateUrl: "views/profile.html",
+          controller: "ProfileCtrl"
+      })
       ;
 
     $urlRouterProvider.otherwise("/cards");

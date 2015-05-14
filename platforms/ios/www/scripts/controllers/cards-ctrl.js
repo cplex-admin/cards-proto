@@ -2,17 +2,6 @@
 
   // Get transform origin poly
   var d = document.createElement('div');
-  var transformKeys = ['webkitTransformOrigin', 'transform-origin', '-webkit-transform-origin', 'webkit-transform-origin',
-              '-moz-transform-origin', 'moz-transform-origin', 'MozTransformOrigin', 'mozTransformOrigin'];
-
-  var TRANSFORM_ORIGIN = 'webkitTransformOrigin';
-  for(var i = 0; i < transformKeys.length; i++) {
-    if(d.style[transformKeys[i]] !== undefined) {
-      TRANSFORM_ORIGIN = transformKeys[i];
-      break;
-    }
-  }
-
   var transitionKeys = ['webkitTransition', 'transition', '-webkit-transition', 'webkit-transition',
               '-moz-transition', 'moz-transition', 'MozTransition', 'mozTransition'];
   var TRANSITION = 'webkitTransition';

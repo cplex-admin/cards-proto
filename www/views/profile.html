@@ -1,0 +1,40 @@
+<ion-view title="Игорь">
+  <ion-nav-bar class="bar-dark bar-actions"></ion-nav-bar>
+  </ion-view>
+  <ion-content scroll="false" class="profile">
+
+    <table class="brief"><tr>
+      <td><img src="{{profile.avatar}}"></td>
+      <td>{{profile.pubs}}<br/><span>публикаций</span></td>
+      <td>{{profile.subscribers}}<br/><span>подписчиков</span></td>
+      <td>{{profile.subscriptions}}<br/><span>подписки</span></td>
+    </tr></table>
+
+    <table class="chart-people"><tr>
+      <td><img src="img/chart.jpg"></td>
+      <td>Люди</td>
+    </tr></table>
+    
+    <div class="list">
+      <a class="item item-avatar item-icon-right"
+          href="#"
+          ng-repeat="item in items | orderBy:sort | filter:filter0"
+          >
+        <img ng-style="{'background-image': 'url(' + item.picture + ')'}">
+        <h2>{{item.question}}</h2>
+        <p>{{item.popularity}}</p>
+        <i class="icon">
+          {{item.stat.total}}<span ng-show="item.stat.today">&nbsp;+{{item.stat.today}}</span>
+        </i>
+      </a>
+    </div>
+
+  </ion-content>
+  <ion-footer-bar class="actions">
+    <table><tr>
+      <td><a ng-click="go('profile')"><img src="img/peoples.png"></a></td>
+      <td><a ng-click="go('cards.list')"><img src="img/home.png"></a></td>
+      <td><a ng-click="go('tabs.chats')"><img src="img/dialogs.png"></a></td>
+    </tr></table>
+  </ion-footer-bar>
+</ion-view>
