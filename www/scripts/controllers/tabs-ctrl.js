@@ -1,6 +1,6 @@
 angular
 .module("cards")
-.controller('TabsCtrl', function($scope, $ionicViewSwitcher, $state, $rootScope, $timeout) {
+.controller('TabsCtrl', function($scope, $ionicViewSwitcher, $state, $rootScope, $timeout, $ionicHistory) {
 
   // Get transform origin poly
   var d = document.createElement('div');
@@ -14,30 +14,32 @@ angular
     }
   }
 
-  $rootScope.$on( "$ionicView.enter", function(scopes, states) {
-    if (states.stateName == 'tabs.chats') {
-      var el = document.getElementById('disap-bnt');
+  $scope.play = function(){
+    var el = document.getElementById('tabs-disap-bnt');
+    el.style.display = 'inline';
+    el.classList.remove('hided');
+    $timeout(function() {
       el.style[TRANSITION] = 'opacity 1s';
       el.classList.add('hided');
       $timeout(function() {
         el.style.display = 'none';
       }, 1000);
+    }, 1);
+  };
+
+  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+    if (fromState.name == '') {
+      var el = document.getElementById('tabs-disap-bnt');
+      el.style.display = 'none';
+    }
+    if (fromState.name == 'cards.list' && toState.name == 'tabs.chats') {
+      $scope.play();
     }
   });
 
   $scope.go = function(path) {
-    if (path == 'tabs.chats') {
-      return;
-    }
-
     $ionicViewSwitcher.nextDirection('none');
     $state.go(path);
-
-    if (path != 'tabs.notif') {
-      var el = document.getElementById('disap-bnt');
-      el.style.display = 'block';
-      el.classList.remove('hided');
-    }
   };
 
 })

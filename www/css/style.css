@@ -752,7 +752,7 @@ ion-footer-bar.actions table td
 }
 
 
-#disap-bnt
+.disap-bnt
 {
   position: absolute;
   bottom: 3px;
@@ -762,7 +762,7 @@ ion-footer-bar.actions table td
   opacity: 1;
 }
 
-#disap-bnt.hided
+.disap-bnt.hided
 {
   opacity: 0;
 }

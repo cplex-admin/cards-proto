@@ -126,11 +126,11 @@ angular
     }, $scope.animDuration);
 
     $timeout(function() {
-      $scope.commentBar.style.bottom = 0;
+      $scope.commentInput.focus();
       $scope.commentInput.onkeypress = $scope.watch13;
       $scope.commentInput.onfocus = $scope.resizeScrollPanel;
       $scope.commentInput.onblur = $scope.resizeScrollPanel;
-      $scope.commentInput.focus();
+      $scope.resizeScrollPanel();
     }, $scope.animDuration + 100);
   };
 
@@ -147,10 +147,7 @@ angular
     $ionicScrollDelegate.freezeScroll(false);
     viewScroll.scrollBottom(true);
 
-    if ($scope.commentBar.style.bottom == '0px' || $scope.commentBar.style.bottom == 0)
-      $scope.commentBar.style.bottom = (window.innerHeight - 62) + 'px';
-    else
-      $scope.commentBar.style.bottom = 0;
+    $scope.commentBar.style.top = (window.innerHeight - 44) + 'px';
   };
 
   $scope.collapse = function() {
