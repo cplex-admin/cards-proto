@@ -121,5 +121,6 @@ function sortNew() {
 }
 
 function sortCancel() {
-  document.getElementById('overlay').remove();
+  var el = document.getElementById('overlay');
+  el.parentNode.removeChild(el);
 }

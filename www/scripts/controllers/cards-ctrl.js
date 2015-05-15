@@ -161,7 +161,7 @@ angular
     $scope.wrapper.style[ionic.CSS.TRANSFORM] = 'translateX(' + $scope.getOffsetX() + 'px)';
 
     $scope.commentInput.blur();
-    $scope.commentBar.style.bottom = '-100px';
+    $scope.commentBar.style.top = '-100px';
     $scope.card.get(0).getElementsByTagName('ion-scroll')[0].style.height = '313px';
 
     var viewScroll = $ionicScrollDelegate.$getByHandle('chat-panel-' + $scope.currIdx);
